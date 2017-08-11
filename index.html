@@ -11,28 +11,43 @@
 <body>
   <div class="container">
     <div class="chatbot">
-      <div class="query">
-        <div class="bubble">
-          <div class="text">
-            <p>Question goes here.</p>
+      <div class="chatbot__header"></div>
+      <div class="chatbot__window">
+        <div class="query">
+          <div class="bubble">
+            <div class="text">
+              <p>Question goes here.</p>
+              <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem delectus laboriosam omnis nesciunt earum molestias quod animi, accusamus amet sapiente nisi doloribus unde necessitatibus odit dolorum magnam. Repellendus, mollitia, velit.</span>
+              <span>Culpa recusandae, inventore, adipisci ipsum dolore quis fugiat repellat perferendis ex dolor vitae vel voluptas deleniti ab praesentium. Quaerat minus omnis quibusdam earum, tempora sint ipsam, natus impedit laudantium voluptatem.</span>
+              <span>Quidem nam qui asperiores itaque cumque, corporis repudiandae perspiciatis fuga ratione, tenetur dicta deleniti. Officia error non debitis nisi voluptatibus consequatur, vitae, obcaecati eligendi velit quod reiciendis omnis, quibusdam exercitationem.</span>
+              <span>Deserunt expedita perferendis, temporibus quae? Accusamus facere quibusdam voluptatem repellendus sequi, earum debitis eos voluptas non iusto, facilis quo. Totam quos voluptas veniam possimus nihil consequuntur esse voluptates sed ex.</span>
+              <span>Ipsam, eius, voluptate. Necessitatibus unde ullam cumque atque porro cum minima suscipit ex sequi fugit dolore assumenda inventore molestiae, nobis, recusandae. Porro, necessitatibus asperiores, harum accusantium ullam numquam iste tempora!</span>
+              <span>Omnis alias aliquam, consectetur reiciendis non dolor atque quia repudiandae voluptate eaque, quidem assumenda similique dolorem tempora doloribus cum molestiae molestias officiis neque ipsa libero magni! Eaque ex voluptatibus, eligendi.</span>
+              <span>Unde accusantium magnam magni odit ipsum autem sapiente nihil odio culpa. Voluptatem animi nemo iure aliquid voluptatum ad quo sed quam, ullam amet ducimus doloremque odio quas vero, reprehenderit earum.</span>
+              <span>Voluptatum esse quo neque veniam quas dolorem laborum ab iure nihil id eius cumque natus distinctio repellendus nam dolores perferendis, facilis voluptates quaerat soluta laboriosam nostrum veritatis consequatur nulla. In.</span>
+              <span>Provident doloremque maxime itaque laboriosam optio reiciendis ex. Minus magnam magni id consectetur quasi eaque hic commodi architecto recusandae facilis, sit illum non, distinctio voluptate, illo nostrum eum fugit officiis.</span>
+              <span>Neque dicta quasi cum voluptatem quos in, ducimus quas ea nisi harum eaque sit nemo dolorum explicabo voluptates animi corporis doloribus asperiores tenetur esse beatae. Temporibus ratione, aliquid molestias rerum!</span></p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="response">
-        <div class="bubble">
-          <div class="text">
-            <p>Response goes here.</p>
-            <p>Can be multi-line, but still contained to one bubble.</p>
+        <div class="response">
+          <div class="bubble">
+            <div class="text">
+              <p>Response goes here.</p>
+              <p>Can be multi-line, but still contained to one bubble.</p>
+            </div>
           </div>
         </div>
+        <div class="loading loading--hidden">
+          <div class="loading__left "></div>
+          <div class="loading__middle"></div>
+          <div class="loading__right"></div>
+        </div>
       </div>
-
-      <div class="input">
-        <input class="input__type" type="text" name="" value="" placeholder="Ask something...">
+      <div class="chatbot__input">
+        <input class="input__text" type="text" name="" value="" placeholder="Say something">
         <div class="input__button">
-          <div class="ball one"></div>
-          <div class="ball two"></div>
-          <div class="ball three"></div>
+          <i class="material-icons input__mic input__mic--inactive">&#xE029;</i>
         </div>
       </div>
     </div>

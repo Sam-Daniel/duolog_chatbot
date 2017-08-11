@@ -12,17 +12,35 @@ body {
 .chatbot {
   width: 600px;
   margin: 0 auto;
-  max-height: 90vh;
-  overflow: scroll;
+  height: 90vh;
   box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
 }
 
-.response {
+.chatbot__window {
+  box-sizing: border-box;
+  height: 70%;
+  overflow: scroll;
+  padding: 20px 12px 12px 20px;
+}
+
+.chatbot__header {
+  height: 20%;
+  background-color: #afafaf;
+  box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.20);
+  position: relative;
+}
+
+/***********************/
+/***** FEED STYLES *****/
+/***********************/
+.query {
   text-align: right;
 }
 
 .query, .response {
-  margin: 12px
+  margin: 12px;
+  font-weight: 100;
 }
 
 .bubble {
@@ -31,25 +49,30 @@ body {
 }
 
 .response .bubble {
-  background-color: #1584FB;
+  background-color: #400080;
   color: #FFFFFF;
   border-radius: 3px 12px 12px;
   text-align: left;
 }
 
 .query .bubble {
-  background-color: #f1f0f0;
-  color: #000000;
-  border-radius: 12px 3px 12px 12px;
+  background-color: #FFFFFF;
+  color: #400080;
+  border-radius: 12px 12px 3px 12px;
+  border: 1px solid #5484ae;
 }
 
-.input {
+/***********************/
+/**** INPUT STYLES *****/
+/***********************/
+
+.chatbot__input {
+  height: 46px;
   border-top: 1px solid #d3d3d3;
   position: relative;
 }
 
-.input__type {
-  height: 100%;
+.input__text {
   font-family: Helvetica, sans-serif;
   padding: 12px;
   border: none;
@@ -61,10 +84,38 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-  line-height: 42px;
 }
 
-.ball {
+.input__mic {
+  font-size: 36px;
+  line-height: 42px;
+  cursor: pointer;
+}
+
+.input__mic--inactive {
+  color: #B7BBC4;
+}
+.input__mic--active {
+  color: #F76949;
+}
+
+/***********************/
+/**** LOADER STYLES ****/
+/***********************/
+
+.loading {
+  text-align: center;
+  font-size: 0;
+}
+.loading .loading--visible {
+  visibility: visible;
+}
+
+.loading--hidden {
+  visibility: hidden;
+}
+
+.loading__left, .loading__middle, .loading__right {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -74,15 +125,15 @@ body {
   margin: 0 1px;
 }
 
-.one {
+.loading__left {
   animation-delay: 0.1s;
 }
 
-.two {
+.loading__middle {
   animation-delay: 0.2s;
 }
 
-.three {
+.loading__right{
   animation-delay: 0.3s;
 }
 
@@ -99,4 +150,14 @@ body {
     opacity: 0.2;
   }
 
+}
+
+/***********************/
+/**** MEDIA QUERIES ****/
+/***********************/
+
+@media (max-width: 600px) {
+  .chatbot {
+    width: 100%;
+  }
 }
