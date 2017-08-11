@@ -45,6 +45,7 @@ body {
 
 .input {
   border-top: 1px solid #d3d3d3;
+  position: relative;
 }
 
 .input__type {
@@ -53,4 +54,49 @@ body {
   padding: 12px;
   border: none;
   font-size: 16px;
+}
+
+.input__button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  line-height: 42px;
+}
+
+.ball {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+  animation: loader 1.4s infinite ease-in-out both;
+  margin: 0 1px;
+}
+
+.one {
+  animation-delay: 0.1s;
+}
+
+.two {
+  animation-delay: 0.2s;
+}
+
+.three {
+  animation-delay: 0.3s;
+}
+
+@keyframes loader {
+  0% {
+    transform: scale(.2);
+    opacity: 1;
+
+  } 50% {
+    transform: scale(1.0);
+    opacity: 0.5;
+  } 100% {
+    transform: scale(.2);
+    opacity: 0.2;
+  }
+
 }
