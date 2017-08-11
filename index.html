@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="style.css">
   <title>Chatbot</title>
 </head>
+
 <body>
   <div class="container">
     <div class="chatbot">
       <div class="chatbot__header"></div>
       <div class="chatbot__window">
-        <div class="query">
-          <div class="bubble">
-            <div class="text">
+        <!-- <div class="query"> -->
+          <!-- <div class="bubble">
+            <div class="bubble__text">
               <p>Question goes here.</p>
-              <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem delectus laboriosam omnis nesciunt earum molestias quod animi, accusamus amet sapiente nisi doloribus unde necessitatibus odit dolorum magnam. Repellendus, mollitia, velit.</span>
-              <span>Culpa recusandae, inventore, adipisci ipsum dolore quis fugiat repellat perferendis ex dolor vitae vel voluptas deleniti ab praesentium. Quaerat minus omnis quibusdam earum, tempora sint ipsam, natus impedit laudantium voluptatem.</span>
-              <span>Quidem nam qui asperiores itaque cumque, corporis repudiandae perspiciatis fuga ratione, tenetur dicta deleniti. Officia error non debitis nisi voluptatibus consequatur, vitae, obcaecati eligendi velit quod reiciendis omnis, quibusdam exercitationem.</span>
-              <span>Deserunt expedita perferendis, temporibus quae? Accusamus facere quibusdam voluptatem repellendus sequi, earum debitis eos voluptas non iusto, facilis quo. Totam quos voluptas veniam possimus nihil consequuntur esse voluptates sed ex.</span>
-              <span>Ipsam, eius, voluptate. Necessitatibus unde ullam cumque atque porro cum minima suscipit ex sequi fugit dolore assumenda inventore molestiae, nobis, recusandae. Porro, necessitatibus asperiores, harum accusantium ullam numquam iste tempora!</span>
-              <span>Omnis alias aliquam, consectetur reiciendis non dolor atque quia repudiandae voluptate eaque, quidem assumenda similique dolorem tempora doloribus cum molestiae molestias officiis neque ipsa libero magni! Eaque ex voluptatibus, eligendi.</span>
-              <span>Unde accusantium magnam magni odit ipsum autem sapiente nihil odio culpa. Voluptatem animi nemo iure aliquid voluptatum ad quo sed quam, ullam amet ducimus doloremque odio quas vero, reprehenderit earum.</span>
-              <span>Voluptatum esse quo neque veniam quas dolorem laborum ab iure nihil id eius cumque natus distinctio repellendus nam dolores perferendis, facilis voluptates quaerat soluta laboriosam nostrum veritatis consequatur nulla. In.</span>
-              <span>Provident doloremque maxime itaque laboriosam optio reiciendis ex. Minus magnam magni id consectetur quasi eaque hic commodi architecto recusandae facilis, sit illum non, distinctio voluptate, illo nostrum eum fugit officiis.</span>
-              <span>Neque dicta quasi cum voluptatem quos in, ducimus quas ea nisi harum eaque sit nemo dolorum explicabo voluptates animi corporis doloribus asperiores tenetur esse beatae. Temporibus ratione, aliquid molestias rerum!</span></p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla doloremque deserunt maiores molestiae ducimus tempore culpa. Quibusdam iste ullam, quidem inventore possimus accusamus. Consectetur quis quas delectus ab itaque, ipsa?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
           </div>
-        </div>
+        </div> -->
+        <!-- TEXT RESPONSE -->
         <div class="response">
           <div class="bubble">
-            <div class="text">
+            <div class="bubble__text">
               <p>Response goes here.</p>
               <p>Can be multi-line, but still contained to one bubble.</p>
             </div>
+          </div>
+        </div>
+        <!-- QUICK REPLY -->
+        <div class="response">
+          <div class="bubble">
+            <div class="bubble__text">
+              <p>What is your quick reply?</p>
+            </div>
+          </div>
+          <div class="quick-reply">
+            <div class="quick-reply__button">Yes.</div>
+            <div class="quick-reply__button">No.</div>
+            <div class="quick-reply__button">Maybe.</div>
           </div>
         </div>
         <div class="loading loading--hidden">
@@ -54,4 +63,5 @@
   </div>
 
 </body>
+
 </html>
