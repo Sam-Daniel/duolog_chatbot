@@ -1,0 +1,56 @@
+body {
+  font-family: Helvetica, sans-serif;
+  padding: 0;
+  margin: 5vh 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.chatbot {
+  width: 600px;
+  margin: 0 auto;
+  max-height: 90vh;
+  overflow: scroll;
+  box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
+}
+
+.response {
+  text-align: right;
+}
+
+.query, .response {
+  margin: 12px
+}
+
+.bubble {
+  display: inline-block;
+  padding: 0 12px;
+}
+
+.response .bubble {
+  background-color: #1584FB;
+  color: #FFFFFF;
+  border-radius: 3px 12px 12px;
+  text-align: left;
+}
+
+.query .bubble {
+  background-color: #f1f0f0;
+  color: #000000;
+  border-radius: 12px 3px 12px 12px;
+}
+
+.input {
+  border-top: 1px solid #d3d3d3;
+}
+
+.input__type {
+  height: 100%;
+  font-family: Helvetica, sans-serif;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+}
