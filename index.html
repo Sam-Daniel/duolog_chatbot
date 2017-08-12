@@ -15,26 +15,28 @@
     <div class="chatbot">
       <div class="chatbot__header"></div>
       <div class="chatbot__window">
-        <!-- <div class="query"> -->
-          <!-- <div class="bubble">
+<!-- QUERY -->
+        <div class="query">
+          <div class="bubble">
             <div class="bubble__text">
               <p>Question goes here.</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla doloremque deserunt maiores molestiae ducimus tempore culpa. Quibusdam iste ullam, quidem inventore possimus accusamus. Consectetur quis quas delectus ab itaque, ipsa?</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
           </div>
-        </div> -->
-        <!-- TEXT RESPONSE -->
+        </div>
+<!-- ^ END: QUERY -->
+
+<!-- RESPONSE: BASIC -->
         <div class="response">
           <div class="bubble">
             <div class="bubble__text">
               <p>Response goes here.</p>
-              <p>Can be multi-line, but still contained to one bubble.</p>
+              <p>Can be multi-line; still contained to one bubble.</p>
             </div>
           </div>
         </div>
-        <!-- QUICK REPLY -->
+<!-- ^ END: RESPONSE: BASIC -->
+
+<!-- RESPONSE: QUICK REPLY -->
         <div class="response">
           <div class="bubble">
             <div class="bubble__text">
@@ -47,21 +49,40 @@
             <div class="quick-reply__button">Maybe.</div>
           </div>
         </div>
-        <div class="loading loading--hidden">
+<!-- ^ END: RESPONSE: QUICK REPLY -->
+
+<!-- RESPONSE: CARD -->
+        <div class="response">
+          <div class="card">
+            <div class="card__image"></div>
+            <div class="card__heading"><strong>This is the heading. It should be truncated with ellipsis after one line.</strong></div>
+            <div class="card__subheading">This is the subheading. It should be truncated at 80 characters. </div>
+            <div class="card__button">Button 1</div>
+            <div class="card__button">Button 2</div>
+          </div>
+        </div>
+<!-- ^ END: RESPONSE: CARD -->
+
+<!-- LOADER -->
+        <div class="loading loading--visible">
           <div class="loading__left "></div>
           <div class="loading__middle"></div>
           <div class="loading__right"></div>
         </div>
+<!-- ^ END: LOADER -->
       </div>
+<!-- ^ END: CHATBOT__WINDOW -->
       <div class="chatbot__input">
         <input class="input__text" type="text" name="" value="" placeholder="Say something">
         <div class="input__button">
           <i class="material-icons input__mic input__mic--inactive">&#xE029;</i>
         </div>
       </div>
+<!-- ^ END: CHATBOT__INPUT -->
     </div>
+<!-- ^ END: CHATBOT -->
   </div>
-
+<!-- ^ END: CONTAINER -->
 </body>
 
 </html>

@@ -19,14 +19,23 @@ body {
 }
 
 /***********************/
+/******* FONTS  ********/
+/***********************/
+
+strong, .card__subheading {
+  font-weight: 500;
+}
+
+/***********************/
 /******* HEADER  *******/
 /***********************/
 
 .chatbot__header {
   height: 25%;
-  background-image: url("https://unsplash.it/500/200?random");
+  background-color: #cccccc; /* Fallback if no image */
+  background-image: url("https://unsplash.it/500/200?random"); /* TODO: remove after JS done */
   background-size: cover;
-  box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
   position: relative;
 }
 
@@ -89,14 +98,52 @@ body {
   text-align: center;
   color: #400080;
   padding: 6px 0;
+  cursor: pointer;
 }
+
+.card {
+  margin: 0 auto;
+  max-width: 400px; /* TODO: Discuss with Doug. Unless anticipated width of app UI is < 600px, the spec'd default width of 200px is kind of small */
+  border: 1px solid #cccccc;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 100%;
+  padding-top: 53%; /* TODO: See todo above. Closest approximation to achieve 1:1.9 ratio, only necessary if width is dynamic.  */
+  background-color: #cccccc; /* Fallback if no image */ /* Fallback if no image */
+  background-image: url("https://unsplash.it/400/300?random"); /* TODO: remove after JS done */
+  background-size: cover;
+}
+
+.card__heading {
+  margin: 6px 12px 0 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__subheading {
+  margin: 0px 12px 6px 12px;
+  color: #888888;
+  font-size: 12px;
+}
+
+.card__button {
+  border-top: 1px solid #cccccc;
+  cursor: pointer;
+  text-align: center;
+  color: #400080;
+  padding: 6px 0;
+}
+
 
 /***********************/
 /******** INPUT ********/
 /***********************/
 
 .chatbot__input {
-  box-sizing: border-box;
   border-top: 1px solid #d3d3d3;
   position: absolute;
   bottom: 0;
@@ -118,7 +165,6 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-
 }
 
 .input__mic {
