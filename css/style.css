@@ -157,6 +157,7 @@ strong, .card__subheading {
   padding-left: 12px;
   border: none;
   font-size: 16px;
+  width: 100%;
   line-height: 60px;
 }
 
@@ -184,19 +185,22 @@ strong, .card__subheading {
 /******** LOADER *******/
 /***********************/
 
-.loading {
+.chatbot__loading {
   text-align: center;
   font-size: 0;
+  position: relative;
+  top: -15px;
 }
-.loading .loading--visible {
+
+.chatbot__loading--visible {
   visibility: visible;
 }
 
-.loading--hidden {
+.chatbot__loading--hidden {
   visibility: hidden;
 }
 
-.loading__left, .loading__middle, .loading__right {
+.loading-left, .loading-middle, .loading-right {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -206,15 +210,15 @@ strong, .card__subheading {
   margin: 0 1px;
 }
 
-.loading__left {
+.loading-left {
   animation-delay: 0.1s;
 }
 
-.loading__middle {
+.loading-middle {
   animation-delay: 0.2s;
 }
 
-.loading__right{
+.loading-right{
   animation-delay: 0.3s;
 }
 
