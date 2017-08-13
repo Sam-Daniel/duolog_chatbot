@@ -3,6 +3,11 @@ var $chatbotWindow;
 var enterKeyCode = 13;
 var loading = false;
 var $loading;
+var responseTypes = {
+  10: "text",
+  11: "card",
+  12: "quick"
+};
 
 var client = new ApiAi.ApiAiClient({accessToken: "b745f3f6e65b458e895add17566b55dc"});
 
@@ -22,15 +27,9 @@ var sendText = function(text) {
 var handleQuery = function(input) {
   toggleLoading();
   sendText(input).then(function(response) {
-    var result;
-    try {
-      result = response.result.fulfillment.speech;
-    } catch (error) {
-      result = "";
-    }
     attachResponse(response);
   }).catch(function(err) {
-    attachResponse(err, "error");
+    attachResponse(err);
   });
 };
 
@@ -48,9 +47,9 @@ var attachQuery = function(query) {
   var $query = $("<div class='query'></div>");
   var $bubble = $("<div class='bubble'></div>");
   var $bubbleText = $("<div class='bubble__text'>");
-  for (var i = 0; i < userQuery.length; i++) {
+  for (var i = 0; i < query.length; i++) {
     var $p = $("<p>");
-    $p.text(userQuery[i]);
+    $p.text(query[i]);
     $bubbleText.append($p);
   }
   $bubble.append($bubbleText);
@@ -60,21 +59,21 @@ var attachQuery = function(query) {
   $input.val("");
 };
 
-var attachResponse = function(response, error) {
+var attachResponse = function(response) {
   var $response = $("<div class='response'></div>");
+  var payload = response.result.fulfillment.messages[0].payload;
+  var responseType = responseTypes[payload.type];
+  if (responseType === "text") {
 
+  } else if (responseType === "quick reply") {
 
-  // create node for response
-  // if (error) {
-    // deal with error (ie, if two arguments are passed in, reponse is an error. handle accordingly. still needs to populate and append node)
-  // } else {
-    // handle normal response (populate and append node)
-    // responseType = response.result.fulfillment.messsages[0].payload.type
-    // if (responseType === 11), is card
-      //  need to add funtion to handle posts back as new queries
-    // if (responseType === 12), is quick reply
-      // need to add function to handle posts back as new queries
-    // if (responseType === 10) || (responseType === 0), is basic reply or intent didn't understand the query.
+  } else if (responseType === "card") {
+
+  } else {
+    // error or not type not in responseTypes
+  }
+
+  // TODO: for card and quick reply, need to add function to handle posts back as new queries
 
 
   // append node to chat window
