@@ -33,7 +33,7 @@ strong, .card__subheading {
 .chatbot__header {
   height: 25%;
   background-color: #cccccc; /* Fallback if no image */
-  /*background-image: url("https://unsplash.it/500/200?random"); /* TODO: remove after JS done */*/
+  background-image: url("https://unsplash.it/500/200?random"); /* TODO: replace */
   background-size: cover;
   box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
   position: relative;
@@ -78,6 +78,7 @@ strong, .card__subheading {
   border: 1px solid #400080;
 }
 
+/*TODO: Might need a more dynamic approach to styling if quick reply options may not always === 3*/
 .quick-reply {
   margin: 12px 0;
   width: 100%;
@@ -103,7 +104,7 @@ strong, .card__subheading {
 
 .card {
   margin: 0 auto;
-  max-width: 400px; /* TODO: Discuss with Doug. Unless anticipated width of app UI is < 600px, the spec'd default width of 200px is kind of small */
+  max-width: 400px;
   border: 1px solid #cccccc;
   border-radius: 12px;
   overflow: hidden;
@@ -111,9 +112,8 @@ strong, .card__subheading {
 
 .card__image {
   width: 100%;
-  padding-top: 53%; /* TODO: See todo above. Closest approximation to achieve 1:1.9 ratio, only necessary if width is dynamic.  */
+  padding-top: 53%; /* TODO: Closest approximation to achieve 1:1.9 ratio, only necessary if width is dynamic. Check w/ Doug  */
   background-color: #cccccc; /* Fallback if no image */ /* Fallback if no image */
-  /*background-image: url("https://unsplash.it/400/300?random"); /* TODO: remove after JS done */*/
   background-size: cover;
 }
 
@@ -165,19 +165,23 @@ strong, .card__subheading {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 0;
+  right: 10px;
 }
 
-.input__mic {
+.input__mic, .input__send {
   font-size: 36px;
   line-height: 60px;
   cursor: pointer;
 }
 
-.input__mic--inactive {
+.input__mic--inactive, .input__send--inactive {
   color: #B7BBC4;
 }
-.input__mic--active {
+.input__mic--active, .input__send--active {
+  color: #F76949;
+}
+
+.input__send--inactive:active {
   color: #F76949;
 }
 
@@ -245,8 +249,16 @@ strong, .card__subheading {
   body {
     margin: 0;
   }
+
   .chatbot {
     width: 100vw;
     height: 100vh;
   }
+
+  .quick-reply__button {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
 }

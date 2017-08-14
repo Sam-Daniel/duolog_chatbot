@@ -61,6 +61,7 @@ var sampleQuickReplyPayload = {
           "payload": {
             "type": 12,
             "title": "What is your quick reply ?",
+            // TODO: I think the Quick Replies JSON may need either a context or for more data in the payload itself, to be attached to the reply button elements as data attributes, in order for the agent to be able to handle the reply ("Yes" or "No", etc, wouldn't be meaningful enough on their own)
             "replies": ["Reply 1", "Reply 2", "Reply 3"]
           }
         }
