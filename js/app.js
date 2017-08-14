@@ -124,13 +124,14 @@ var attachResponse = function(response, error) {
     for (var i = 0; i < replies.length; i++) {
       var $button = $("<div class='quick-reply__button'></div>");
       $button.text(replies[i]);
+      $button.data("queryLink", replies[i]);
+
       $button.after(" ");
       $quickReply.append($button);
     }
     $bubble.append($bubbleText);
     $response.append($bubble);
     $response.append($quickReply);
-
 
   } else if (responseType === "card") {
     var $card = $("<div class='card'></div>");
@@ -154,10 +155,8 @@ var attachResponse = function(response, error) {
       var $cardButton = $("<div class='card__button'></div>");
       $cardButton.text(cardButtons[cardButton].label);
       if (cardButtons[cardButton].hasOwnProperty("web_url")) {
-        $cardButton.addClass("web-button");
         $cardButton.data("webUrl", cardButtons[cardButton].web_url);
       } else {
-        $cardButton.addClass("query-button");
         $cardButton.data("queryLink", cardButtons[cardButton].postback);
       }
       $card.append($cardButton);
@@ -193,10 +192,12 @@ $(document).ready(function() {
 
   $(document).on("click", ".quick-reply__button", function() {
     console.log("quick reply button clicked");
-    //handle quick reply post back. A data attribute on $(this) should store info to post back
+    //TODO: refactor w/ func below
+    handleInput($(this).data("queryLink"));
   });
 
-  $(document).on("click", ".card__button", function() {
+  $(document).on("click", ".card__button", function(e) {
+    // TODO: replace all this shit with a call to a function passing e, then use $(e.target)
     console.log("card reply button clicked");
     if ($(this).data("webUrl")) {
       window.open($(this).data("webUrl"), "_blank");
