@@ -1,9 +1,8 @@
-
-var $input;
-var $chatbotWindow;
+/**************************/
+/******** GLOBALS *********/
+/**************************/
 var enterKeyCode = 13;
 var loading = false;
-var $loading;
 var responseTypes = {
   0: "default",  // default intents. TODO: Confirm (fulfilment.messages.type === 0) indicates default
   10: "text",
@@ -11,6 +10,16 @@ var responseTypes = {
   12: "quick"
 };
 
+/**************************/
+/******** ELEMENTS ********/
+/**************************/
+var $input;
+var $chatbotWindow;
+var $loading;
+
+/****************************************/
+/******** NEW APIAICLIENT OBJECT ********/
+/****************************************/
 var client = new ApiAi.ApiAiClient({accessToken: "b745f3f6e65b458e895add17566b55dc"});
 
 var toggleLoading = function() {
@@ -46,6 +55,15 @@ var sendClicked = function() {
   handleInput(value);
 };
 
+var buttonClicked = function(el) {
+  var $el = $(el.target);
+  if ($el.data("webUrl")) {
+    window.open($el.data("webUrl"), "_blank");
+  } else if ($el.data("queryLink")) {
+    handleInput($el.data("queryLink"));
+  }
+};
+
 var getInputValue = function() {
   return $($input).val();
 };
@@ -76,7 +94,10 @@ var attachQuery = function(query) {
   $input.val("");
 };
 
+
 var attachResponse = function(response, error) {
+  var $response;
+
   // TODO: Refactor - all responses are similar
   if (error !== undefined) {
     console.log(response);
@@ -85,7 +106,7 @@ var attachResponse = function(response, error) {
     return;
   }
 
-  var $response = $("<div class='response'></div>");
+  $response = $("<div class='response'></div>");
 
   var payload;
   try {
@@ -178,33 +199,25 @@ var attachResponse = function(response, error) {
 
 $(document).ready(function() {
 
+  /**************************/
+  /******** ELEMENTS ********/
+  /**************************/
   $input = $(".input__text");
   $chatbotWindow = $(".chatbot__window");
   $loading = $(".chatbot__loading");
   $send = $(".input__send");
+
+  /**************************/
+  /***** EVENT HANDLERS *****/
+  /**************************/
   $send.on("click", sendClicked);
   $input.on("keydown", function(e) {
     if (getInputValue() === "") {
-      return;
+      return; //API throws an error to blank queries.
     }
     inputKeyDown(e);
   });
-
-  $(document).on("click", ".quick-reply__button", function() {
-    console.log("quick reply button clicked");
-    //TODO: refactor w/ func below
-    handleInput($(this).data("queryLink"));
+  $(document).on("click", ".quick-reply__button, .card__button", function(e) {
+    buttonClicked(e);
   });
-
-  $(document).on("click", ".card__button", function(e) {
-    // TODO: replace all this shit with a call to a function passing e, then use $(e.target)
-    console.log("card reply button clicked");
-    if ($(this).data("webUrl")) {
-      window.open($(this).data("webUrl"), "_blank");
-    } else if ($(this).data("queryLink")) {
-      handleInput($(this).data("queryLink"));
-    }
-
-  });
-
 });
