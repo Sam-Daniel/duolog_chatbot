@@ -5,7 +5,7 @@ var enterKeyCode = 13;
 var loading = false;
 var $loading;
 var responseTypes = {
-  0: "stock",
+  0: "default",  // default intents. TODO: Confirm (fulfilment.messages.type === 0) indicates default
   10: "text",
   11: "card",
   12: "quick"
@@ -31,8 +31,8 @@ var handleQuery = function(input) {
   sendText(input).then(function(response) {
     attachResponse(response);
   }).catch(function(err) {
-    console.log("I'm sorry, bork");
-    toggleLoading(); //TODO: remove this. Just to toggle loading til errors are handled. 
+    console.log(err);
+    attachResponse(err, "error");
   });
 };
 
@@ -59,7 +59,7 @@ var inputKeyDown = function(event) {
 };
 
 var attachQuery = function(query) {
-  // TODO: Refactor — basically identical to text response (func w/ args type, text)
+  // TODO: Refactor — basically identical to text response
   query = query.split("\n");
   var $query = $("<div class='query'></div>");
   var $bubble = $("<div class='bubble'></div>");
@@ -77,34 +77,41 @@ var attachQuery = function(query) {
 };
 
 var attachResponse = function(response, error) {
-  // At the moment, this is equivalent to (if error === undefined).
-  if (error === "error") {
-
-    console.log('bork');
-
+  // TODO: Refactor - all responses are similar
+  if (error !== undefined) {
+    console.log(response);
+    console.log("An error has occurred.");
+  // TODO: Add error handling
+    return;
   }
+
   var $response = $("<div class='response'></div>");
-  console.log(response);
-  var messageType = response.result.fulfillment.messages[0].type;
-  var payload = response.result.fulfillment.messages[0].payload;
-  var responseType = responseTypes[payload.type];
-  console.log(responseType);
-  if (responseType === "text") {
-    // TODO: Refactor — basically identical to query and quick reply bubble (func w/ args type, text).
-    var text = payload.text.split("\n");
+
+  var payload;
+  try {
+    payload = response.result.fulfillment.messages[0].payload;
+  } catch(e) {
+    payload = null;
+  }
+
+  var responseType = payload ? responseTypes[payload.type] : responseTypes[0];
+
+  if ((responseType === "text") || (responseType === "default")) {
+    var text = payload ? payload.text.split("\n") : new Array(response.result.fulfillment.messages[0].speech);
     var $bubble = $("<div class='bubble'></div>");
     var $bubbleText = $("<div class='bubble__text'>");
+
     for (var i = 0; i < text.length; i++) {
       var $p = $("<p>");
       $p.text(text[i]);
       $bubbleText.append($p);
     }
+
     $bubble.append($bubbleText);
     $response.append($bubble);
-    $chatbotWindow.append($response);
+
 
   } else if (responseType === "quick") {
-
     var title = payload.title;
     var replies = payload.replies;
     var $bubble = $("<div class='bubble'></div>");
@@ -121,24 +128,38 @@ var attachResponse = function(response, error) {
     $bubble.append($bubbleText);
     $response.append($bubble);
     $response.append($quickReply);
-    $chatbotWindow.append($response);
-
 
   } else if (responseType === "card") {
+    var $card = $("<div class='card'></div>");
+    var $cardImage = $("<div class='card__image'></div>");
+    var $cardHeading = $("<div class='card__heading'></div>");
+    var $cardSubheading = $("<div class='card__subheading'></div>");
 
-  } else {
-    if (messageType === 0) {
-      // TODO: Confirm that this correlates to default API.AI intent responses (welcome, fallback, etc). If so, handle same as responseType === 'text'
-    } else {
-      // error or not type not in responseTypes. Catchall response. Error?
+    $cardImage.css("background-image", "url(" + payload.imageurl + ")");
+
+    $cardHeading.text(payload.title);
+
+    var subheadingText = (payload.subtitle.length >= 80) ? payload.subtitle.substring(0,80) + "..." : payload.subtitle;
+    $cardSubheading.text(subheadingText);
+
+    $card.append($cardImage);
+    $card.append($cardHeading);
+    $card.append($cardSubheading);
+
+    var cardButtons = payload.buttons;
+    for (var cardButton in cardButtons) {
+      var $cardButton = $("<div class='card__button'></div>");
+      $cardButton.text(cardButtons[cardButton].label);
+      $card.append($cardButton);
     }
 
+    $response.append($card);
+
+  } else {
+    // error or not type not in responseTypes. Catchall response.
   }
 
-  // TODO: for card and quick reply, need to add function to handle posts back as new queries
-
-  // append node to chat window
-  // scroll to bottom of chat window:
+  $chatbotWindow.append($response);
   $chatbotWindow.animate({ scrollTop: $chatbotWindow[0].scrollHeight}, 500);
   $input.val("");
   toggleLoading();
