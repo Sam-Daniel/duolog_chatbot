@@ -32,6 +32,7 @@ var handleQuery = function(input) {
     attachResponse(response);
   }).catch(function(err) {
     console.log("I'm sorry, bork");
+    toggleLoading(); //TODO: remove this. Just to toggle loading til errors are handled. 
   });
 };
 
