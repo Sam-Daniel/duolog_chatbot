@@ -22,7 +22,7 @@ body {
 /******* FONTS  ********/
 /***********************/
 
-strong, .card__subheading {
+strong, .card__subtitle {
   font-weight: 500;
 }
 
@@ -123,14 +123,14 @@ strong, .card__subheading {
   background-size: cover;
 }
 
-.card__heading {
+.card__title {
   margin: 6px 12px 0 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.card__subheading {
+.card__subtitle {
   margin: 0px 12px 6px 12px;
   color: #888888;
   font-size: 12px;

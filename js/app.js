@@ -76,6 +76,19 @@ var inputKeyDown = function(event) {
   handleInput(value);
 };
 
+var newFunc = function(type, payload, $wrapper) {
+  if (type === "query") {
+
+  } else if (type === "default") {
+
+  } else if (type === "text") {
+
+  } else if (type === "quick") {
+
+  } else if (type === "card") {}
+
+};
+
 var attachQuery = function(query) {
   // TODO: Refactor — basically identical to text response
   query = query.split("\n");
@@ -157,19 +170,19 @@ var attachResponse = function(response, error) {
   } else if (responseType === "card") {
     var $card = $("<div class='card'></div>");
     var $cardImage = $("<div class='card__image'></div>");
-    var $cardHeading = $("<div class='card__heading'></div>");
-    var $cardSubheading = $("<div class='card__subheading'></div>");
+    var $cardTitle = $("<div class='card__title'></div>");
+    var $cardSubtitle = $("<div class='card__subtitle'></div>");
 
     $cardImage.css("background-image", "url(" + payload.imageurl + ")");
 
-    $cardHeading.text(payload.title);
+    $cardTitle.text(payload.title);
 
     var subheadingText = (payload.subtitle.length >= 80) ? payload.subtitle.substring(0,80) + "..." : payload.subtitle;
-    $cardSubheading.text(subheadingText);
+    $cardSubtitle.text(subheadingText);
 
     $card.append($cardImage);
-    $card.append($cardHeading);
-    $card.append($cardSubheading);
+    $card.append($cardTitle);
+    $card.append($cardSubtitle);
 
     var cardButtons = payload.buttons;
     for (var cardButton in cardButtons) {
