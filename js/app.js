@@ -119,15 +119,18 @@ var attachResponse = function(response, error) {
     var $p = $("<p>");
     $p.text(title);
     $bubbleText.append($p);
+    // TODO:
     $quickReply = $("<div class='quick-reply'></div>");
     for (var i = 0; i < replies.length; i++) {
       var $button = $("<div class='quick-reply__button'></div>");
       $button.text(replies[i]);
+      $button.after(" ");
       $quickReply.append($button);
     }
     $bubble.append($bubbleText);
     $response.append($bubble);
     $response.append($quickReply);
+
 
   } else if (responseType === "card") {
     var $card = $("<div class='card'></div>");
@@ -150,6 +153,13 @@ var attachResponse = function(response, error) {
     for (var cardButton in cardButtons) {
       var $cardButton = $("<div class='card__button'></div>");
       $cardButton.text(cardButtons[cardButton].label);
+      if (cardButtons[cardButton].hasOwnProperty("web_url")) {
+        $cardButton.addClass("web-button");
+        $cardButton.data("webUrl", cardButtons[cardButton].web_url);
+      } else {
+        $cardButton.addClass("query-button");
+        $cardButton.data("queryLink", cardButtons[cardButton].postback);
+      }
       $card.append($cardButton);
     }
 
@@ -160,6 +170,8 @@ var attachResponse = function(response, error) {
   }
 
   $chatbotWindow.append($response);
+  // TODO: Must be a better way of doing this:
+  $(".quick-reply__button").after(" ");
   $chatbotWindow.animate({ scrollTop: $chatbotWindow[0].scrollHeight}, 500);
   $input.val("");
   toggleLoading();
@@ -173,6 +185,9 @@ $(document).ready(function() {
   $send = $(".input__send");
   $send.on("click", sendClicked);
   $input.on("keydown", function(e) {
+    if (getInputValue() === "") {
+      return;
+    }
     inputKeyDown(e);
   });
 
@@ -183,7 +198,12 @@ $(document).ready(function() {
 
   $(document).on("click", ".card__button", function() {
     console.log("card reply button clicked");
-    //handle card post back. A data attribute on $(this) should store info to post back
+    if ($(this).data("webUrl")) {
+      window.open($(this).data("webUrl"), "_blank");
+    } else if ($(this).data("queryLink")) {
+      handleInput($(this).data("queryLink"));
+    }
+
   });
 
 });

@@ -100,6 +100,12 @@ strong, .card__subheading {
   color: #400080;
   padding: 6px 0;
   cursor: pointer;
+  transition: all 0.25s;
+}
+
+.quick-reply__button:hover {
+  color: #FFFFFF;
+  background-color: #400080;
 }
 
 .card {
@@ -136,7 +142,14 @@ strong, .card__subheading {
   text-align: center;
   color: #400080;
   padding: 6px 0;
+  transition: all 0.25s;
 }
+
+.card__button:hover {
+  color: #FFFFFF;
+  background-color: #400080;
+}
+
 
 /***********************/
 /******** INPUT ********/
