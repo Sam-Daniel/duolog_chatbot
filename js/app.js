@@ -1,34 +1,34 @@
-/**************************/
-/******** GLOBALS *********/
-/**************************/
-var enterKeyCode = 13;
-var loading = false;
-var responseTypes = {
-  0: "default",  // default intents. TODO: Confirm (fulfilment.messages.type === 0) indicates default
-  10: "text",
-  11: "card",
-  12: "quick"
+
+
+var chatbot = {
+  enterKeyCode: 13,
+  loading: false,
+  responseTypes: {
+    0: "default", // default intents. TODO: Confirm (fulfilment.messages.type === 0) indicates default
+    10: "text",
+    11: "card",
+    12: "quick"
+  },
+  accessToken: "b745f3f6e65b458e895add17566b55dc"
 };
+
 
 /**************************/
 /******** ELEMENTS ********/
 /**************************/
-var $input;
-var $chatbotWindow;
-var $loading;
+// var $input;
+// var $chatbotWindow;
+// var $loading;
 
-/****************************************/
-/******** NEW APIAICLIENT OBJECT ********/
-/****************************************/
-var client = new ApiAi.ApiAiClient({accessToken: "b745f3f6e65b458e895add17566b55dc"});
+chatbot.client = new ApiAi.ApiAiClient({accessToken: chatbot.accessToken});
 
-var toggleLoading = function() {
-  if (!loading) {
+chatbot.toggleLoading = function() {
+  if (!chatbot.loading) {
     $loading.removeClass("chatbot__loading--hidden").addClass("chatbot__loading--visible");
   } else {
     $loading.removeClass("chatbot__loading--visible").addClass("chatbot__loading--hidden");
   }
-  loading = !loading;
+  chatbot.loading = !chatbot.loading;
 };
 
 var sendText = function(text) {
@@ -69,25 +69,25 @@ var getInputValue = function() {
 };
 
 var inputKeyDown = function(event) {
-  if (event.which !== enterKeyCode) {
+  if (event.which !== chatbot.enterKeyCode) {
     return;
   }
   var value = getInputValue();
   handleInput(value);
 };
 
-var newFunc = function(type, payload, $wrapper) {
-  if (type === "query") {
-
-  } else if (type === "default") {
-
-  } else if (type === "text") {
-
-  } else if (type === "quick") {
-
-  } else if (type === "card") {}
-
-};
+// var attach = function(type, payload, $wrapper) {
+//   if (type === "query") {
+//
+//   } else if (type === "default") {
+//
+//   } else if (type === "text") {
+//
+//   } else if (type === "quick") {
+//
+//   } else if (type === "card") {}
+//
+// };
 
 var attachQuery = function(query) {
   // TODO: Refactor — basically identical to text response
@@ -110,6 +110,20 @@ var attachQuery = function(query) {
 
 var attachResponse = function(response, error) {
   var $response;
+  var $bubble;
+  var $bubbleText;
+  var $p;
+  var $card;
+  var $cardTitle;
+  var $cardSubtitle;
+  var $cardImage;
+  var $cardButton;
+  var $quickReply;
+  var $text;
+  var payload;
+  var title;
+  var replies;
+
 
   // TODO: Refactor - all responses are similar
   if (error !== undefined) {
@@ -121,22 +135,21 @@ var attachResponse = function(response, error) {
 
   $response = $("<div class='response'></div>");
 
-  var payload;
   try {
     payload = response.result.fulfillment.messages[0].payload;
   } catch(e) {
     payload = null;
   }
 
-  var responseType = payload ? responseTypes[payload.type] : responseTypes[0];
+  var responseType = payload ? chatbot.responseTypes[payload.type] : chatbot.responseTypes[0];
 
   if ((responseType === "text") || (responseType === "default")) {
-    var text = payload ? payload.text.split("\n") : new Array(response.result.fulfillment.messages[0].speech);
-    var $bubble = $("<div class='bubble'></div>");
-    var $bubbleText = $("<div class='bubble__text'>");
+    text = payload ? payload.text.split("\n") : new Array(response.result.fulfillment.messages[0].speech);
+    $bubble = $("<div class='bubble'></div>");
+    $bubbleText = $("<div class='bubble__text'>");
 
     for (var i = 0; i < text.length; i++) {
-      var $p = $("<p>");
+      $p = $("<p>");
       $p.text(text[i]);
       $bubbleText.append($p);
     }
@@ -146,19 +159,19 @@ var attachResponse = function(response, error) {
 
 
   } else if (responseType === "quick") {
-    var title = payload.title;
-    var replies = payload.replies;
-    var $bubble = $("<div class='bubble'></div>");
-    var $bubbleText = $("<div class='bubble__text'></div>");
-    var $p = $("<p>");
+    title = payload.title;
+    replies = payload.replies;
+    $bubble = $("<div class='bubble'></div>");
+    $bubbleText = $("<div class='bubble__text'></div>");
+    $p = $("<p>");
     $p.text(title);
     $bubbleText.append($p);
     // TODO:
     $quickReply = $("<div class='quick-reply'></div>");
-    for (var i = 0; i < replies.length; i++) {
+    for (var j = 0; j < replies.length; j++) {
       var $button = $("<div class='quick-reply__button'></div>");
-      $button.text(replies[i]);
-      $button.data("queryLink", replies[i]);
+      $button.text(replies[j]);
+      $button.data("queryLink", replies[j]);
 
       $button.after(" ");
       $quickReply.append($button);
@@ -168,10 +181,10 @@ var attachResponse = function(response, error) {
     $response.append($quickReply);
 
   } else if (responseType === "card") {
-    var $card = $("<div class='card'></div>");
-    var $cardImage = $("<div class='card__image'></div>");
-    var $cardTitle = $("<div class='card__title'></div>");
-    var $cardSubtitle = $("<div class='card__subtitle'></div>");
+    $card = $("<div class='card'></div>");
+    $cardImage = $("<div class='card__image'></div>");
+    $cardTitle = $("<div class='card__title'></div>");
+    $cardSubtitle = $("<div class='card__subtitle'></div>");
 
     $cardImage.css("background-image", "url(" + payload.imageurl + ")");
 
@@ -186,7 +199,7 @@ var attachResponse = function(response, error) {
 
     var cardButtons = payload.buttons;
     for (var cardButton in cardButtons) {
-      var $cardButton = $("<div class='card__button'></div>");
+      $cardButton = $("<div class='card__button'></div>");
       $cardButton.text(cardButtons[cardButton].label);
       if (cardButtons[cardButton].hasOwnProperty("web_url")) {
         $cardButton.data("webUrl", cardButtons[cardButton].web_url);
