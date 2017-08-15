@@ -128,12 +128,14 @@ strong, .card__subtitle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 500;
 }
 
 .card__subtitle {
   margin: 0px 12px 6px 12px;
   color: #888888;
   font-size: 12px;
+  font-weight: 500;
 }
 
 .card__button {
