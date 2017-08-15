@@ -31,49 +31,49 @@ chatbot.toggleLoading = function() {
   chatbot.loading = !chatbot.loading;
 };
 
-var sendText = function(text) {
-  return client.textRequest(text);
+chatbot.sendText = function(text) {
+  return chatbot.client.textRequest(text);
 };
 
-var handleQuery = function(input) {
-  toggleLoading();
-  sendText(input).then(function(response) {
-    attachResponse(response);
+chatbot.handleQuery = function(input) {
+  chatbot.toggleLoading();
+  chatbot.sendText(input).then(function(response) {
+    chatbot.attachResponse(response);
   }).catch(function(err) {
     console.log(err);
-    attachResponse(err, "error");
+    chatbot.attachResponse(err, "error");
   });
 };
 
-var handleInput = function(query) {
-  attachQuery(query);
-  handleQuery(query);
+chatbot.handleInput = function(query) {
+  chatbot.attachQuery(query);
+  chatbot.handleQuery(query);
 };
 
-var sendClicked = function() {
+chatbot.sendClicked = function() {
   var value = getInputValue();
-  handleInput(value);
+  chatbot.handleInput(value);
 };
 
-var buttonClicked = function(el) {
+chatbot.buttonClicked = function(el) {
   var $el = $(el.target);
   if ($el.data("webUrl")) {
     window.open($el.data("webUrl"), "_blank");
   } else if ($el.data("queryLink")) {
-    handleInput($el.data("queryLink"));
+    chatbot.handleInput($el.data("queryLink"));
   }
 };
 
-var getInputValue = function() {
+chatbot.getInputValue = function() {
   return $($input).val();
 };
 
-var inputKeyDown = function(event) {
+chatbot.inputKeyDown = function(event) {
   if (event.which !== chatbot.enterKeyCode) {
     return;
   }
-  var value = getInputValue();
-  handleInput(value);
+  var value = chatbot.getInputValue();
+  chatbot.handleInput(value);
 };
 
 // var attach = function(type, payload, $wrapper) {
@@ -89,7 +89,7 @@ var inputKeyDown = function(event) {
 //
 // };
 
-var attachQuery = function(query) {
+chatbot.attachQuery = function(query) {
   // TODO: Refactor — basically identical to text response
   query = query.split("\n");
   var $query = $("<div class='query'></div>");
@@ -108,7 +108,7 @@ var attachQuery = function(query) {
 };
 
 
-var attachResponse = function(response, error) {
+chatbot.attachResponse = function(response, error) {
   var $response;
   var $bubble;
   var $bubbleText;
@@ -220,7 +220,7 @@ var attachResponse = function(response, error) {
   $(".quick-reply__button").after(" ");
   $chatbotWindow.animate({ scrollTop: $chatbotWindow[0].scrollHeight}, 500);
   $input.val("");
-  toggleLoading();
+  chatbot.toggleLoading();
 };
 
 $(document).ready(function() {
@@ -236,14 +236,14 @@ $(document).ready(function() {
   /**************************/
   /***** EVENT HANDLERS *****/
   /**************************/
-  $send.on("click", sendClicked);
+  $send.on("click", chatbot.sendClicked);
   $input.on("keydown", function(e) {
-    if (getInputValue() === "") {
+    if (chatbot.getInputValue() === "") {
       return; //API throws an error to blank queries.
     }
-    inputKeyDown(e);
+    chatbot.inputKeyDown(e);
   });
   $(document).on("click", ".quick-reply__button, .card__button", function(e) {
-    buttonClicked(e);
+    chatbot.buttonClicked(e);
   });
 });
