@@ -61,7 +61,8 @@ strong, .card__subtitle {
 
 .bubble {
   display: inline-block;
-  padding: 0 12px;
+  /*padding: 0 12px;*/
+  padding: 6px 12px;
 }
 
 .response .bubble {
@@ -69,6 +70,7 @@ strong, .card__subtitle {
   color: #FFFFFF;
   border-radius: 3px 12px 12px;
   text-align: left;
+  border: 1px solid #400080;
 }
 
 .query .bubble {
@@ -76,6 +78,10 @@ strong, .card__subtitle {
   color: #400080;
   border-radius: 12px 12px 3px 12px;
   border: 1px solid #400080;
+}
+
+.bubble__text p {
+  margin: 0;
 }
 
 /*TODO: Might need a more dynamic approach to styling if quick reply options may not always === 3*/
@@ -186,6 +192,7 @@ strong, .card__subtitle {
   font-size: 36px;
   line-height: 60px;
   cursor: pointer;
+  transition: all 0.25s;
 }
 
 .input__mic--inactive, .input__send--inactive {
@@ -205,7 +212,6 @@ strong, .card__subtitle {
 
 .chatbot__loading {
   text-align: center;
-  font-size: 0;
   position: relative;
   top: -15px;
 }
@@ -252,7 +258,6 @@ strong, .card__subtitle {
     transform: scale(.2);
     opacity: 0.2;
   }
-
 }
 
 /***********************/
