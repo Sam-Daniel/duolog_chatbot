@@ -27,17 +27,14 @@ var chatbot = {
   init: function() {
     this.toggleLoading();
     var date = new Date();
-    // return this.eventRequest("custom_welcome", null, {timezone: date.toLocaleString()});
-    this.client.eventRequest("custom_welcome").then(function(response) {
+    this.eventRequest("custom_welcome", null, {timezone: date.toLocaleString()}).then(function(response) {
       chatbot.attachResponse(response);
     }).catch(function(err) {
       console.log("Error:", err);
       chatbot.attachResponse(err, "error");
     });
-  }
+  }, activeContexts: {contexts: []}
 };
-
-
 
 chatbot.toggleLoading = function() {
   if (!chatbot.loading) {
@@ -115,7 +112,7 @@ chatbot.attachQuery = function(query) {
 
 chatbot.handleQuery = function(input) {
   chatbot.toggleLoading();
-  chatbot.sendText(input).then(function(response) {
+  chatbot.sendText(input, chatbot.activeContexts).then(function(response) {
     chatbot.attachResponse(response);
   }).catch(function(err) {
     console.log("Error:", err);
@@ -145,6 +142,8 @@ chatbot.attachResponse = function(response, error) {
     var replies;
 
     $response = $("<div class='response'></div>");
+
+    chatbot.activeContexts.contexts = response.result.contexts;
 
     responseType = chatbot.responseTypes[response.result.fulfillment.messages[0].type];
 
@@ -257,20 +256,6 @@ $(document).ready(function() {
   $send = $(".input__send");
 
   chatbot.init();
-
-  //
-  // chatbot.init = function() {
-  //   var options = {
-  //     event: "custom_welcome",
-  //     contexts: ["dog", "cat", "chicken"],
-  //     timezone: "Australia/Sydney"
-  //   };
-  //   chatbot.sendText("chicken", options).then(function(response) {
-  //     chatbot.attachResponse(response);
-  //   });
-  // };
-  //
-  // chatbot.init(); // Trigger welcome message:
 
   /**************************/
   /***** EVENT HANDLERS *****/
