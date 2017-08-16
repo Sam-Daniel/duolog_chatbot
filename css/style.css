@@ -206,25 +206,52 @@ strong, .card__subtitle {
   color: #F76949;
 }
 
-/***********************/
-/******** LOADER *******/
-/***********************/
+/********************************/
+/******** STATUS / LOADER *******/
+/********************************/
 
-.chatbot__loading {
+.chatbot__status {
   text-align: center;
   position: relative;
   top: -15px;
+  width: 100%;
 }
 
-.chatbot__loading--visible {
+.error {
+  transition: all 0.25s;
+  margin: 0 auto;
+}
+
+.error__message {
+  background-color: #767676;
+  color: #FFFFFF;
+  padding: 6px;
+  position: relative;
+  top: -15px;
+  font-weight: 100;
+}
+
+.error--visible {
   visibility: visible;
 }
 
-.chatbot__loading--hidden {
+.error--hidden {
   visibility: hidden;
 }
 
-.loading-left, .loading-middle, .loading-right {
+.loading {
+  font-size: 0;
+}
+
+.loading--visible {
+  visibility: visible;
+}
+
+.loading--hidden {
+  visibility: hidden;
+}
+
+.loading__left, .loading__middle, .loading__right {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -234,15 +261,15 @@ strong, .card__subtitle {
   margin: 0 1px;
 }
 
-.loading-left {
+.loading__left {
   animation-delay: 0.1s;
 }
 
-.loading-middle {
+.loading__middle {
   animation-delay: 0.2s;
 }
 
-.loading-right{
+.loading__right{
   animation-delay: 0.3s;
 }
 
