@@ -10,6 +10,7 @@ body {
 }
 
 .chatbot {
+  background-color: white;
   width: 500px;
   margin: 0 auto;
   height: 90vh;
@@ -124,8 +125,8 @@ strong, .card__subtitle {
 
 .card__image {
   width: 100%;
-  padding-top: 53%; /* TODO: Closest approximation to achieve 1:1.9 ratio, only necessary if width is dynamic. Check w/ Doug  */
-  background-color: #cccccc; /* Fallback if no image */ /* Fallback if no image */
+  padding-top: 53%; /* TODO: Approximation to achieve 1:1.9 ratio, only necessary if width is dynamic. */
+  background-color: #cccccc; /* Fallback if no image */ /
   background-size: cover;
 }
 
@@ -206,9 +207,9 @@ strong, .card__subtitle {
   color: #F76949;
 }
 
-/********************************/
-/******** STATUS / LOADER *******/
-/********************************/
+/****************************************/
+/******** STATUS / ERROR / LOADER *******/
+/****************************************/
 
 .chatbot__status {
   text-align: center;

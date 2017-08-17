@@ -19,15 +19,14 @@ var chatbot = {
     return this.client.sessionId;
   },
   sendText: function(text, options) {
-      return this.client.textRequest(text, options);
+    return this.client.textRequest(text, options);
   },
   eventRequest: function(event, eventOptions, options) {
     return this.client.eventRequest(event, eventOptions, options);
   },
   init: function() {
     this.toggleLoading();
-    var date = new Date();
-    this.eventRequest("custom_welcome", null, {timezone: date.toLocaleString()}).then(function(response) {
+    this.eventRequest("custom_welcome").then(function(response) {
       chatbot.attachResponse(response);
     }).catch(function(err) {
       console.log("Error:", err);
@@ -225,9 +224,6 @@ chatbot.attachResponse = function(response, error) {
       }
 
       $response.append($card);
-
-    } else {
-      // error or not type not in responseTypes. Catchall response.
     }
 
     $chatbotWindow.append($response);
