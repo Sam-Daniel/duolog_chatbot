@@ -2,6 +2,7 @@ body {
   font-family: Helvetica, sans-serif;
   padding: 0;
   margin: 5vh 0;
+  background-color: #82adb0;
 }
 
 .container {
@@ -90,6 +91,8 @@ strong, .card__subtitle {
   margin: 12px 0;
   width: 100%;
   text-align: justify;
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 
 .quick-reply::after {
