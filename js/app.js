@@ -1,5 +1,5 @@
 var chatbot = {
-  headerImage: "//i.imgur.com/NggwaAk.png",
+  headerImage: "http://i.imgur.com/NggwaAk.png",
   backgroundColor: "#82adb0",
   accessToken: "b745f3f6e65b458e895add17566b55dc",
   enterKeyCode: 13,
@@ -56,7 +56,7 @@ chatbot.toggleError = function(msg) {
       $error.removeClass("error--visible").addClass("error--hidden");
       window.setTimeout(function() {
         $error.find(".error__message").text("");
-      }, 500);
+      }, 100);
     }, 2000);
   }
 };
@@ -250,15 +250,15 @@ $(document).ready(function() {
   /***** jQUERY OBJECTS *****/
   /**************************/
   $input = $(".input__text");
-  $chatbot = $(".chatbot");
+  $container = $(".container");
   $chatbotWindow = $(".chatbot__window");
   $chatbotHeader = $(".chatbot__header");
   $loading = $(".loading");
   $error = $(".error");
   $send = $(".input__send");
 
-  $chatbot.css("background-color", chatbot.backgroundColor)
-  $chatbotHeader.css("background-image", chatbot.headerImage);
+  $container.css("background-color", chatbot.backgroundColor);
+  $chatbotHeader.css("background-image", "url('" + chatbot.headerImage + "')");
 
   chatbot.init();
 

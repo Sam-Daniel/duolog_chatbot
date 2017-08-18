@@ -10,7 +10,7 @@ body {
 }
 
 .chatbot {
-  background-color: white;
+  background-color: #FFFFFF;
   width: 500px;
   margin: 0 auto;
   height: 90vh;
@@ -83,6 +83,7 @@ body {
 }
 
 .quick-reply__button {
+  background-color: #FFFFFF;
   display: inline-block;
   border-radius: 12px;
   border: 1px solid #400080;
@@ -120,6 +121,7 @@ body {
 }
 
 .card {
+  background-color: #FFFFFF;
   margin: 0 auto;
   max-width: 400px;
   border: 1px solid #cccccc;
