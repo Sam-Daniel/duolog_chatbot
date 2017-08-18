@@ -1,4 +1,7 @@
 var chatbot = {
+  headerImage: "https://cdn.cultofmac.com/wp-content/uploads/2014/08/Yosemite-2-640x360.jpg",
+  backgroundColor: "#FFFFFF",
+  accessToken: "b745f3f6e65b458e895add17566b55dc",
   enterKeyCode: 13,
   loading: false,
   error: false,
@@ -11,7 +14,6 @@ var chatbot = {
     11: "card",
     12: "quick"
   },
-  accessToken: "b745f3f6e65b458e895add17566b55dc",
   get client() {
     return new ApiAi.ApiAiClient({accessToken: this.accessToken});
   },

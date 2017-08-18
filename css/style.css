@@ -21,21 +21,12 @@ body {
 }
 
 /***********************/
-/******* FONTS  ********/
-/***********************/
-
-strong, .card__subtitle {
-  font-weight: 500;
-}
-
-/***********************/
 /******* HEADER  *******/
 /***********************/
 
 .chatbot__header {
   height: 25%;
   background-color: #cccccc; /* Fallback if no image */
-  background-image: url("https://unsplash.it/500/200?random"); /* TODO: replace */
   background-size: cover;
   box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
   position: relative;
@@ -141,10 +132,15 @@ strong, .card__subtitle {
   font-size: 14px;
 }
 
+.card__title strong {
+  font-weight: 500;
+}
+
 .card__subtitle {
   margin: 0px 12px 6px 12px;
   color: #888888;
   font-size: 14px;
+  font-weight: 500;
   font-weight: 500;
 }
 
@@ -303,7 +299,7 @@ strong, .card__subtitle {
 
   .quick-reply__button {
     display: block;
-    width: 100%;
+    width: 98%;
     margin-bottom: 6px;
   }
 
