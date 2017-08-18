@@ -250,7 +250,7 @@ $(document).ready(function() {
   /***** jQUERY OBJECTS *****/
   /**************************/
   $input = $(".input__text");
-  $container = $(".container");
+  $container = $("body");
   $chatbotWindow = $(".chatbot__window");
   $chatbotHeader = $(".chatbot__header");
   $loading = $(".loading");
