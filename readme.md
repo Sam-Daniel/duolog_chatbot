@@ -19,11 +19,23 @@ The chatbot is a static web app that connects a web interface to API.AI chatbot 
 - API.AI JavaScript SDK
 - Google Material Icons
 
-A note regarding the JavaScript SDK – This library is sufficient for the current implementation but doesn't really bring much to the table, aside from frustratingly obfuscating the process of making calls to the API with a poorly documented library. Handling AJAX requests with bare XMLHttpRequests or jQuery .ajax() functions may indeed be preferable if the application is further modified.
+A note regarding the API.AI JavaScript SDK – This library is sufficient for the current implementation but doesn't really bring much to the table, aside from frustratingly obfuscating the process of making calls to the API and being a poorly documented library. Handling AJAX requests with bare XMLHttpRequests or jQuery .ajax() functions may indeed be preferable if the application is further modified.
 
-### Function
+### Usage
 
-The application is designed to take text input from the user via the text input field, send requests to the API.AI chatbot agent matching the access token configured in the app.js file, and handle responses returned by the agent, displaying them in the chatbot UI, and allowing further interaction from the user.
+The application is designed to take text input from the user via the text input field, send requests to the API.AI chatbot agent matching the access token configured in the app.js file, and handle responses returned by the agent, displaying them in the chatbot window, and allowing further input from the user. 
+
+#### Welcome message
+
+Once the document has been loaded by the browser, an event request is sent to API.AI. The response is handled generically, meaning the response be of any valid type handled by the application (text, or custom payload (rich text, card, quick reply)) configured in the API.AI console.
+
+#### Error message
+
+If the ajax request to API.AI resolves to an error, an error message will be temporarily displayed in the chatbot window.
+
+#### Loading
+
+Once any request is sent, a loading animation is displayed in the chatbot window and will remain so until a response is received from the API or the call resolves in an error.
 
 ### API.AI JSON payloads
 
@@ -157,7 +169,7 @@ For a successful implementation example, see:
 
 The app has been designed to allow minor changes to be made via text editor by persons with little/no web development experience. The following application properties can be configured by modifying the `chatbot` object in the [](./js/app.js) file:
 
-- **Header image:** Replace URL in the `chatbot.headerImage` property with the URL of any image on the web. While the image will entirely cover the relevant element in the UI (without distortion) regardless of the size and aspect ratio of the source image, it is recommended that source images as close to 500 x 157 pixels as possible are used to ensure optimal appearance with minimal performance impact (eg, due to unnecessarily large file sizes).
+- **Header image:** Replace URL in the `chatbot.headerImage` property with the URL of any image on the web, _minus the http/https prefix_. While the image will entirely cover the relevant element in the UI (without distortion) regardless of the size and aspect ratio of the source image, it is recommended that source images as close to 500 x 157 pixels as possible are used to ensure optimal appearance with minimal performance impact (eg, due to unnecessarily large file sizes).
 - **Chatbot agent:** Replace the token in the `chatbot.accessToken` property. The access token for the agent intended to be connected to the application can be selected in the API.AI console be selecting the agent, then clicking the settings cog next to the agent name and copying the `client access token` to the clipboard. Note: ensure that the client access token is copied and *not* the developer access token.
 - **Chatbot background color:** Replace the color in the `chatbot.backgroundColor` property. This can be any color in valid CSS color format (eg, any of `#FFFFFF` or `rgb(0,0,0)` or `rgba(0,0,0,1)` or `white` will work to make the background color white).
 
@@ -166,7 +178,7 @@ For all the changes above, ensure that the value given to the property is enclos
 ```js
 
 var chatbot = {
-  headerImage: "https://cdn.cultofmac.com/wp-content/uploads/2014/08/Yosemite-2-640x360.jpg",
+  headerImage: "//i.imgur.com/NggwaAk.png",
   backgroundColor: "#FFFFFF",
   accessToken: "b745f3f6e65b458e895add17566b55dc",
   enterKeyCode: 13,

@@ -1,6 +1,6 @@
 var chatbot = {
-  headerImage: "https://cdn.cultofmac.com/wp-content/uploads/2014/08/Yosemite-2-640x360.jpg",
-  backgroundColor: "#FFFFFF",
+  headerImage: "//i.imgur.com/NggwaAk.png",
+  backgroundColor: "#82adb0",
   accessToken: "b745f3f6e65b458e895add17566b55dc",
   enterKeyCode: 13,
   loading: false,
@@ -153,7 +153,7 @@ chatbot.attachResponse = function(response, error) {
       messageType = chatbot.messageTypes[payload.type];
     } else {
       payload = null;
-      messageType = chatbot.messageTypes[10]; // This assumes that all default/type 0 responses from the API will be basic text messages.
+      messageType = chatbot.messageTypes[10]; //Aside from custom payload responses, assume response type is basic text.
     }
 
     if (messageType === "text") {
@@ -182,6 +182,8 @@ chatbot.attachResponse = function(response, error) {
       $bubbleText.append($p);
       // TODO:
       $quickReply = $("<div class='quick-reply'></div>");
+      var numberOfReplies = replies.length;
+      $quickReply.addClass("quick-reply--" + numberOfReplies);
       for (var j = 0; j < replies.length; j++) {
         var $button = $("<div class='quick-reply__button'></div>");
         $button.text(replies[j]);
@@ -248,10 +250,15 @@ $(document).ready(function() {
   /***** jQUERY OBJECTS *****/
   /**************************/
   $input = $(".input__text");
+  $chatbot = $(".chatbot");
   $chatbotWindow = $(".chatbot__window");
+  $chatbotHeader = $(".chatbot__header");
   $loading = $(".loading");
   $error = $(".error");
   $send = $(".input__send");
+
+  $chatbot.css("background-color", chatbot.backgroundColor)
+  $chatbotHeader.css("background-image", chatbot.headerImage);
 
   chatbot.init();
 

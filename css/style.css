@@ -2,7 +2,6 @@ body {
   font-family: Helvetica, sans-serif;
   padding: 0;
   margin: 5vh 0;
-  background-color: #82adb0;
 }
 
 .container {
@@ -77,19 +76,10 @@ body {
   margin: 0;
 }
 
-/*TODO: Might need a more dynamic approach to styling if quick reply options may not always === 3*/
 .quick-reply {
   margin: 12px 0;
   width: 100%;
   text-align: justify;
-  white-space: nowrap;
-  overflow-x: scroll;
-}
-
-.quick-reply::after {
-  content: "";
-  width: 100%;
-  display: inline-block;
 }
 
 .quick-reply__button {
@@ -102,6 +92,26 @@ body {
   padding: 6px 0;
   cursor: pointer;
   transition: all 0.25s;
+  overflow: hidden;
+}
+
+.quick-reply--5, .quick-reply--4 {
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+.quick-reply--2 .quick-reply__button {
+  width: 48%;
+}
+
+.quick-reply--1 .quick-reply__button {
+  width: 98%;
+}
+
+.quick-reply::after {
+  content: "";
+  width: 100%;
+  display: inline-block;
 }
 
 .quick-reply__button:hover {
@@ -119,7 +129,7 @@ body {
 
 .card__image {
   width: 100%;
-  padding-top: 53%; /* Approximation to achieve 1:1.9 ratio, only necessary if width is dynamic. */
+  padding-top: 53%; /* Approximation to achieve 1:1.9 ratio*/
   background-size: cover;
 }
 
@@ -299,7 +309,7 @@ body {
 
   .quick-reply__button {
     display: block;
-    width: 98%;
+    width: 98% !important;
     margin-bottom: 6px;
   }
 
