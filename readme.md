@@ -6,7 +6,7 @@
 | Developer      | [Christopher Barnaby](http://www.cbarnaby.com.au)       |
 | Date           | 17 August 2017                                          |
 | Project type   | Proof of Concept                                        |
-| Version        | 1.0.0                                                   |
+| Version        | 1.1.0                                                   |
 ___
 
 ### Overview
@@ -206,3 +206,11 @@ NOTE: It is recommended that any changes aside from those listed above in 'Confi
   Go to [BitBalloon](https://www.bitballoon.com/sites/duolog) and — _in one action_  — drag and drop the entire updated project folder (the **index.html**, the **js** folder and all files therein and the **css** folder and all files therein) to the area that says "Drag & Drop to Update your Site".
 
 The changes should immediately be reflected in the live application (http://duolog.bitballoon.com/) and all pages on which the application has been embedded via iframe.
+
+___
+
+### Change Log
+
+| Version | Date           | Changes |
+| :------ | :------------- | :------------- |
+| 1.1.0   | 21 August 2017 | Application now distinguishes between — and disregards — messages intended for other platforms, and handles multiple messages per response. |
