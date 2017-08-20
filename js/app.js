@@ -34,8 +34,8 @@ var chatbot = {
       chatbot.attachResponse(response);
     }).catch(function(err) {
       console.log("Error:", err);
-      // Don't handle error responses to the initial request. No need to alert users to a problem here. Log the error to the console for debugging/health checks.
-      chatbot.attachResponse(err, "error");
+      // Don't handle error responses to the initial request. No need to alert users to a problem here. Log the error to the console for debugging/health checks. Uncomment next line if initial request errors should be reflected in UI.
+      // chatbot.attachResponse(err, "error");
     });
   }, activeContexts: {contexts: []}
 };
@@ -172,7 +172,6 @@ chatbot.attachResponse = function(response, error) {
     if (messageElement === undefined) {
       return;
     }
-
     $response = $("<div class='response'></div>");
     responseType = chatbot.responseTypes[response.result.fulfillment.messages[messageElement].type];
 

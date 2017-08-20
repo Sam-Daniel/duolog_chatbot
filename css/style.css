@@ -74,6 +74,7 @@ body {
 
 .bubble__text p {
   margin: 0;
+  line-height: 24px;
 }
 
 .quick-reply {
@@ -84,12 +85,12 @@ body {
 
 .quick-reply__button {
   background-color: #FFFFFF;
-  display: inline-block;
+  color: #400080;
   border-radius: 12px;
   border: 1px solid #400080;
+  display: inline-block;
   width: 30%;
   text-align: center;
-  color: #400080;
   padding: 6px 0;
   cursor: pointer;
   transition: all 0.25s;
