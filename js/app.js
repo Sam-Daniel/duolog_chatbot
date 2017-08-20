@@ -1,9 +1,9 @@
 var chatbot = {
-  // CONFIGURABLE OPTIONS...
+  // START: CONFIGURABLE OPTIONS
   headerImage: "http://i.imgur.com/NggwaAk.png",
   backgroundColor: "#82adb0",
   accessToken: "32d41205e7b5454a96117ac24ad65897",
-  // ...CONFIGURABLE OPTIONS
+  // END: CONFIGURABLE OPTIONS
   enterKeyCode: 13,
   loading: false,
   error: false,
@@ -31,11 +31,10 @@ var chatbot = {
   init: function() {
     this.toggleLoading();
     this.eventRequest("custom_welcome").then(function(response) {
-      chatbot.attachResponse(response);
+      chatbot.handleResponse(response);
     }).catch(function(err) {
       console.log("Error:", err);
-      // Don't handle error responses to the initial request. No need to alert users to a problem here. Log the error to the console for debugging/health checks. Uncomment next line if initial request errors should be reflected in UI.
-      // chatbot.attachResponse(err, "error");
+      chatbot.attachResponse(err, "error");
     });
   }, activeContexts: {contexts: []}
 };
@@ -54,12 +53,15 @@ chatbot.toggleError = function(msg) {
     ? "Something went wrong. Please check your connection."
     : msg;
   if (!chatbot.error) {
+    chatbot.error = !chatbot.error;
     $error.find(".error__message").text(msg).end().removeClass("error--hidden").addClass("error--visible");
     window.setTimeout(function() {
+      console.log("erroring");
       $error.removeClass("error--visible").addClass("error--hidden");
       window.setTimeout(function() {
         $error.find(".error__message").text("");
-      }, 100);
+        chatbot.error = !chatbot.error;
+      }, 1000);
     }, 2000);
   }
 };
@@ -117,28 +119,44 @@ chatbot.attachQuery = function(query) {
 chatbot.handleQuery = function(input) {
   chatbot.toggleLoading();
   chatbot.sendText(input, chatbot.activeContexts).then(function(response) {
-    console.log(response);
-    chatbot.attachResponse(response);
+    chatbot.handleResponse(response);
   }).catch(function(err) {
     console.log("Error:", err);
     chatbot.attachResponse(err, "error");
   });
 };
 
-chatbot.getMessage = function(array) {
-  // The array passed to this method (response.result.fulfillment.messages) may contain a number of messages. This method relies on a maximum of one message intended for use on the chatbot web application to be returned in the response from the api. While the chatbot only uses messages of type 0 and 4, both these types are also used by the api for platform-specific messages (eg, Facebook). The simplest way to differentiate between messages intended for other platforms and messages intended for the chatbot web application is to check for the presence of a 'platform' key in the message object. If that key is present, the message is assumed to be for another platform and is disregarded.
-  var result;
-  for (var i = 0; i < array.length; i++) {
-    if ((array[i].type === 4) && (!array[i].hasOwnProperty("platform"))) {
-      result = i;
-    } else if ((array[i].type === 0) && (!array[i].hasOwnProperty("platform"))) {
-      result = i;
-    }
+chatbot.checkMessage = function(message) {
+// While the chatbot only uses messages of type 0 and 4, both these types are also used by the api for platform-specific messages (eg, Facebook). The simplest way to differentiate between messages intended for other platforms and messages intended for the chatbot web application is to check for the presence of a 'platform' key in the message object. If that key is present, the message is assumed to be for another platform and is disregarded.
+  if (((message.type === 4) && (!message.hasOwnProperty("platform"))) || ((message.type === 0) && (!message.hasOwnProperty("platform")))) {
+    return true;
+  } else {
+    return false;
   }
-  return result;
 };
 
-chatbot.attachResponse = function(response, error) {
+chatbot.handleResponse = function(response) {
+  // Reset the contexts on the chatbot object. Okay to replace, rather than add to, the contexts array, since active contexts and context expiry for the session are handled by api.ai.
+  chatbot.activeContexts.contexts = response.result.contexts;
+  // The messages array in the response may contain a number of messages, >= 0 of which are intended for the chatbot web application.
+  var allMessages = response.result.fulfillment.messages;
+
+  if (!allMessages.length) {
+    return;
+  }
+
+  var messagesForChatbot = allMessages.filter(chatbot.checkMessage);
+
+  if (!messagesForChatbot.length) {
+    return;
+  }
+
+  for (var i = 0; i < messagesForChatbot.length; i++) {
+    chatbot.attachResponse(messagesForChatbot[i]);
+  }
+};
+
+chatbot.attachResponse = function(message, error) {
 
 // If a second argument is passed to this method, the response is an error.
   if (error === undefined) {
@@ -154,29 +172,17 @@ chatbot.attachResponse = function(response, error) {
     var $cardButton;
     var $quickReply;
     var $text;
+
     var responseType;
     var messageType;
     var payload;
     var title;
     var replies;
 
-    // Reset the contexts on the chatbot object. Okay to replace, rather than add to, the contexts array, since active contexts and context expiry for the session are handled by api.ai.
-    chatbot.activeContexts.contexts = response.result.contexts;
-
-    var messages = response.result.fulfillment.messages;
-
-    // The messages array may contain a number of messages, <= 1 of which are intended for the chatbot web application.
-    var messageElement = chatbot.getMessage(messages);
-
-    // If the getMessage method returns undefined, there are no messages in the response intended for use by the chatbot web application.
-    if (messageElement === undefined) {
-      return;
-    }
     $response = $("<div class='response'></div>");
-    responseType = chatbot.responseTypes[response.result.fulfillment.messages[messageElement].type];
-
+    responseType = chatbot.responseTypes[message.type];
     if (responseType !== "default") {
-      payload = response.result.fulfillment.messages[messageElement].payload;
+      payload = message.payload;
       messageType = chatbot.messageTypes[payload.type];
     } else {
       payload = null;
@@ -186,7 +192,7 @@ chatbot.attachResponse = function(response, error) {
     if (messageType === "text") {
       text = payload
         ? payload.text.split("\n")
-        : new Array(response.result.fulfillment.messages[messageElement].speech);
+        : new Array(message.speech);
       $bubble = $("<div class='bubble'></div>");
       $bubbleText = $("<div class='bubble__text'>");
 
@@ -267,7 +273,9 @@ chatbot.attachResponse = function(response, error) {
     scrollTop: $chatbotWindow[0].scrollHeight
   }, 500);
   $input.val("");
-  chatbot.toggleLoading();
+  if (chatbot.loading) {
+    chatbot.toggleLoading();
+  }
 };
 
 $(document).ready(function() {
