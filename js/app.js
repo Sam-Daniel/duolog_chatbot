@@ -1,7 +1,9 @@
 var chatbot = {
+  // CONFIGURABLE OPTIONS...
   headerImage: "http://i.imgur.com/NggwaAk.png",
   backgroundColor: "#82adb0",
-  accessToken: "b745f3f6e65b458e895add17566b55dc",
+  accessToken: "32d41205e7b5454a96117ac24ad65897",
+  // ...CONFIGURABLE OPTIONS
   enterKeyCode: 13,
   loading: false,
   error: false,
@@ -32,6 +34,7 @@ var chatbot = {
       chatbot.attachResponse(response);
     }).catch(function(err) {
       console.log("Error:", err);
+      // Don't handle error responses to the initial request. No need to alert users to a problem here. Log the error to the console for debugging/health checks.
       chatbot.attachResponse(err, "error");
     });
   }, activeContexts: {contexts: []}
@@ -114,6 +117,7 @@ chatbot.attachQuery = function(query) {
 chatbot.handleQuery = function(input) {
   chatbot.toggleLoading();
   chatbot.sendText(input, chatbot.activeContexts).then(function(response) {
+    console.log(response);
     chatbot.attachResponse(response);
   }).catch(function(err) {
     console.log("Error:", err);
@@ -121,8 +125,22 @@ chatbot.handleQuery = function(input) {
   });
 };
 
+chatbot.getMessage = function(array) {
+  // The array passed to this method (response.result.fulfillment.messages) may contain a number of messages. This method relies on a maximum of one message intended for use on the chatbot web application to be returned in the response from the api. While the chatbot only uses messages of type 0 and 4, both these types are also used by the api for platform-specific messages (eg, Facebook). The simplest way to differentiate between messages intended for other platforms and messages intended for the chatbot web application is to check for the presence of a 'platform' key in the message object. If that key is present, the message is assumed to be for another platform and is disregarded.
+  var result;
+  for (var i = 0; i < array.length; i++) {
+    if ((array[i].type === 4) && (!array[i].hasOwnProperty("platform"))) {
+      result = i;
+    } else if ((array[i].type === 0) && (!array[i].hasOwnProperty("platform"))) {
+      result = i;
+    }
+  }
+  return result;
+};
+
 chatbot.attachResponse = function(response, error) {
 
+// If a second argument is passed to this method, the response is an error.
   if (error === undefined) {
 
     var $response;
@@ -142,14 +160,24 @@ chatbot.attachResponse = function(response, error) {
     var title;
     var replies;
 
-    $response = $("<div class='response'></div>");
-
+    // Reset the contexts on the chatbot object. Okay to replace, rather than add to, the contexts array, since active contexts and context expiry for the session are handled by api.ai.
     chatbot.activeContexts.contexts = response.result.contexts;
 
-    responseType = chatbot.responseTypes[response.result.fulfillment.messages[0].type];
+    var messages = response.result.fulfillment.messages;
+
+    // The messages array may contain a number of messages, <= 1 of which are intended for the chatbot web application.
+    var messageElement = chatbot.getMessage(messages);
+
+    // If the getMessage method returns undefined, there are no messages in the response intended for use by the chatbot web application.
+    if (messageElement === undefined) {
+      return;
+    }
+
+    $response = $("<div class='response'></div>");
+    responseType = chatbot.responseTypes[response.result.fulfillment.messages[messageElement].type];
 
     if (responseType !== "default") {
-      payload = response.result.fulfillment.messages[0].payload;
+      payload = response.result.fulfillment.messages[messageElement].payload;
       messageType = chatbot.messageTypes[payload.type];
     } else {
       payload = null;
@@ -159,7 +187,7 @@ chatbot.attachResponse = function(response, error) {
     if (messageType === "text") {
       text = payload
         ? payload.text.split("\n")
-        : new Array(response.result.fulfillment.messages[0].speech);
+        : new Array(response.result.fulfillment.messages[messageElement].speech);
       $bubble = $("<div class='bubble'></div>");
       $bubbleText = $("<div class='bubble__text'>");
 
@@ -180,7 +208,6 @@ chatbot.attachResponse = function(response, error) {
       $p = $("<p>");
       $p.text(title);
       $bubbleText.append($p);
-      // TODO:
       $quickReply = $("<div class='quick-reply'></div>");
       var numberOfReplies = replies.length;
       $quickReply.addClass("quick-reply--" + numberOfReplies);
