@@ -3,7 +3,7 @@
 |                |                                                         |
 | :------------- | :------------------------------------------------------ |
 | Owner          | Doug Maloney, Duolog                                    |
-| Developer      | [Christopher Barnaby](http://www.cbarnaby.com.au)       |
+| Developer      | [Christopher Barnaby](http://www.cjbarnaby.com.au)       |
 | Date           | 17 August 2017                                          |
 | Project type   | Proof of Concept                                        |
 | Version        | 1.1.0                                                   |
