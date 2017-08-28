@@ -17,24 +17,44 @@ var chatbot = {
     12: "quick"
   },
   get client() {
-    return new ApiAi.ApiAiClient({accessToken: this.accessToken});
+    try {
+      return new ApiAi.ApiAiClient({accessToken: this.accessToken});
+    } catch(error) {
+      this.toggleError(error.message);
+    }
   },
   get sessionId() {
-    return this.client.sessionId;
+    try {
+      return this.client.sessionId;
+    } catch(error) {
+      this.toggleError(error.message);
+    }
   },
   sendText: function(text, options) {
-    return this.client.textRequest(text, options);
+    try {
+      var request = this.client.textRequest(text, options);
+      this.toggleLoading();
+      return request;
+    } catch(error) {
+      this.toggleError(error.message);
+    }
   },
   eventRequest: function(event, eventOptions, options) {
-    return this.client.eventRequest(event, eventOptions, options);
+    try {
+      var request = this.client.eventRequest(event, eventOptions, options);
+      this.toggleLoading();
+      return request;
+    } catch(error) {
+      this.toggleError(error.message);
+    }
+
   },
   init: function() {
-    this.toggleLoading();
     this.eventRequest("custom_welcome").then(function(response) {
       chatbot.handleResponse(response);
-    }).catch(function(err) {
-      console.log("Error:", err);
-      chatbot.attachResponse(err, "error");
+    }).catch(function(error) {
+      console.log("Error:", error);
+      chatbot.attachResponse(error, "error");
     });
   }, activeContexts: {contexts: []}
 };
@@ -56,7 +76,6 @@ chatbot.toggleError = function(msg) {
     chatbot.error = !chatbot.error;
     $error.find(".error__message").text(msg).end().removeClass("error--hidden").addClass("error--visible");
     window.setTimeout(function() {
-      console.log("erroring");
       $error.removeClass("error--visible").addClass("error--hidden");
       window.setTimeout(function() {
         $error.find(".error__message").text("");
@@ -117,7 +136,6 @@ chatbot.attachQuery = function(query) {
 };
 
 chatbot.handleQuery = function(input) {
-  chatbot.toggleLoading();
   chatbot.sendText(input, chatbot.activeContexts).then(function(response) {
     chatbot.handleResponse(response);
   }).catch(function(err) {
@@ -233,8 +251,8 @@ chatbot.attachResponse = function(message, error) {
       $cardImage = $("<div class='card__image'></div>");
       $cardTitle = $("<div class='card__title'></div>");
       $cardSubtitle = $("<div class='card__subtitle'></div>");
-
-      $cardImage.css("background-image", "url(" + payload.imageurl + ")");
+      var image = (payload.imageurl !== "") ? payload.imageurl : this.headerImage;
+      $cardImage.css("background-image", "url(" + image + ")");
 
       $cardTitle.text(payload.title);
 
