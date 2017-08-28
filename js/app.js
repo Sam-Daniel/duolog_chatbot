@@ -1,3 +1,5 @@
+var iframe;
+
 var chatbot = {
   // START: CONFIGURABLE OPTIONS
   headerImage: "http://i.imgur.com/NggwaAk.png",
@@ -339,5 +341,7 @@ $(document).ready(function() {
   $(document).on("click", ".quick-reply__button, .card__button", function(e) {
     chatbot.buttonClicked(e);
   });
+
+  iframe = $("iframe");
 
 });
