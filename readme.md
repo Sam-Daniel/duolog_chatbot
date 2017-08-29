@@ -130,8 +130,8 @@ The application will respond to contexts configured for an agent intent in the A
 
 The application has been deployed to [BitBalloon](https://www.bitballoon.com/), a free static website hosting platform.
 
-- [BitBalloon chatbot admin portal](https://www.bitballoon.com/sites/duolog)
-- [Live application](http://duolog.bitballoon.com/)
+- [BitBalloon chatbot admin portal](https://www.bitballoon.com/sites/duolog-webdemo)
+- [Live application](http://duolog-webdemo.bitballoon.com/)
 
 The application (as deployed on BitBalloon) can be embedded in another website via HTML `<iframe>` without causing cross origin resource sharing errors. Using a CMS system such as SquareSpace, WordPress, etc, a custom page should be built with the following HTML:
 
@@ -203,9 +203,9 @@ NOTE: It is recommended that any changes aside from those listed above in 'Confi
 
 3. **Redeploy the application to BitBalloon**.
 
-  Go to [BitBalloon](https://www.bitballoon.com/sites/duolog) and — _in one action_  — drag and drop the entire updated project folder (the **index.html**, the **js** folder and all files therein and the **css** folder and all files therein) to the area that says "Drag & Drop to Update your Site".
+  Go to [BitBalloon](https://www.bitballoon.com/sites/duolog-webdemo) and — _in one action_  — drag and drop the entire updated project folder (the **index.html**, the **js** folder and all files therein and the **css** folder and all files therein) to the area that says "Drag & Drop to Update your Site".
 
-The changes should immediately be reflected in the live application (http://duolog.bitballoon.com/) and all pages on which the application has been embedded via iframe.
+The changes should immediately be reflected in the live application (http://duolog-webdemo.bitballoon.com/) and all pages on which the application has been embedded via iframe.
 
 ___
 
