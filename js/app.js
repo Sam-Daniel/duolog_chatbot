@@ -136,6 +136,7 @@ chatbot.checkMessage = function(message) {
 };
 
 chatbot.handleResponse = function(response) {
+  console.log(response);
   // Reset the contexts on the chatbot object. Okay to replace, rather than add to, the contexts array, since active contexts and context expiry for the session are handled by api.ai.
   chatbot.activeContexts.contexts = response.result.contexts;
   // The messages array in the response may contain a number of messages, >= 0 of which are intended for the chatbot web application.
