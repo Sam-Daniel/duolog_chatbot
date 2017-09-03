@@ -46,6 +46,17 @@ body {
   text-align: right;
 }
 
+.response {
+  position: relative;
+}
+.response::before {
+  content: url(../assets/duolog_logo_small.png);
+  opacity: 0.2;
+  position: absolute;
+  left: -40px;
+  transform: scale(0.5) translateY(-50%);
+}
+
 .query, .response {
   margin: 12px;
   font-weight: 100;
