@@ -1,7 +1,12 @@
+html {
+  font-size: 62.5%;
+}
+
 body {
   font-family: Helvetica, sans-serif;
   padding: 0;
   margin: 5vh 0;
+  font-size: 1.2rem;
 }
 
 .container {
@@ -11,7 +16,8 @@ body {
 
 .chatbot {
   background-color: #FFFFFF;
-  width: 500px;
+  max-width: 360px;
+  max-height: 640px;
   margin: 0 auto;
   height: 90vh;
   box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
@@ -24,11 +30,13 @@ body {
 /***********************/
 
 .chatbot__header {
-  height: 25%;
+  height: 15%;
+  min-height: 96px;
   background-color: #cccccc; /* Fallback if no image */
   background-size: cover;
   box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
   position: relative;
+  z-index: 1;
 }
 
 /***********************/
@@ -37,7 +45,7 @@ body {
 
 .chatbot__window {
   box-sizing: border-box;
-  max-height: 65%;
+  height: 80%;
   overflow: scroll;
   padding: 20px 12px 12px 20px;
 }
@@ -46,15 +54,28 @@ body {
   text-align: right;
 }
 
+.response {
+  position: relative;
+}
+
+.card::before, .response > .bubble::before {
+  content: url(../assets/duolog_logo_small.png);
+  opacity: 0.2;
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.35);
+}
+
 .query, .response {
   margin: 12px;
   font-weight: 100;
+  animation: 500ms ease-in-out zoom;
 }
 
 .bubble {
   display: inline-block;
-  /*padding: 0 12px;*/
-  padding: 6px 12px;
+  padding: 0 1.2rem;
 }
 
 .response .bubble {
@@ -63,6 +84,7 @@ body {
   border-radius: 3px 12px 12px;
   text-align: left;
   border: 1px solid #400080;
+  position: relative;
 }
 
 .query .bubble {
@@ -74,7 +96,7 @@ body {
 
 .bubble__text p {
   margin: 0;
-  line-height: 24px;
+  line-height: 2rem;
 }
 
 .quick-reply {
@@ -91,10 +113,10 @@ body {
   display: inline-block;
   width: 30%;
   text-align: center;
-  padding: 6px 0;
   cursor: pointer;
   transition: all 0.25s;
   overflow: hidden;
+  line-height: 2.2rem;
 }
 
 .quick-reply--5, .quick-reply--4 {
@@ -142,7 +164,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.3rem;
 }
 
 .card__title strong {
@@ -150,9 +172,9 @@ body {
 }
 
 .card__subtitle {
-  margin: 0px 12px 6px 12px;
+  margin: 2px 12px 6px 12px;
   color: #888888;
-  font-size: 14px;
+  font-size: 1.2rem;
   font-weight: 500;
   font-weight: 500;
 }
@@ -162,7 +184,7 @@ body {
   cursor: pointer;
   text-align: center;
   color: #400080;
-  padding: 6px 0;
+  line-height: 2.2rem;
   transition: all 0.25s;
 }
 
@@ -171,6 +193,26 @@ body {
   background-color: #400080;
 }
 
+.video {
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  max-width: 400px;
+  border: 1px solid #cccccc;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0;
+}
+
+iframe {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.video__player {
+  border: none;
+  display: block;
+}
 /***********************/
 /******** INPUT ********/
 /***********************/
@@ -179,7 +221,7 @@ body {
   border-top: 1px solid #d3d3d3;
   position: absolute;
   bottom: 0;
-  height: 60px;
+  height: 4rem;
   width: 100%;
   background-color: #FFFFFF;
 }
@@ -188,9 +230,9 @@ body {
   font-family: Helvetica, sans-serif;
   padding-left: 12px;
   border: none;
-  font-size: 16px;
+  font-size: 1.4rem;
   width: 100%;
-  line-height: 60px;
+  line-height: 4rem;
 }
 
 .input__button {
@@ -201,8 +243,8 @@ body {
 }
 
 .input__mic, .input__send {
-  font-size: 36px;
-  line-height: 60px;
+  font-size: 3rem;
+  line-height: 4rem;
   cursor: pointer;
   transition: all 0.25s;
 }
@@ -227,6 +269,7 @@ body {
   position: relative;
   top: -15px;
   width: 100%;
+  font-size: 1.2rem;
 }
 
 .error--hidden {
@@ -282,6 +325,10 @@ body {
   animation-delay: 0.3s;
 }
 
+/*******************************/
+/***** ANIMATION KEYFRAMES *****/
+/*******************************/
+
 @keyframes loader {
   0% {
     transform: scale(.2);
@@ -296,11 +343,24 @@ body {
   }
 }
 
+@keyframes zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  } 70% {
+    opacity: .7;
+    transform: scale(1.05);
+  } 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /***********************/
 /**** MEDIA QUERIES ****/
 /***********************/
 
-@media (max-width: 500px) {
+@media (max-width: 320px) {
   body {
     margin: 0;
   }

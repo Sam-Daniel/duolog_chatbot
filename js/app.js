@@ -4,7 +4,8 @@ var chatbot = {
   // START: CONFIGURABLE OPTIONS
   headerImage: "http://i.imgur.com/NggwaAk.png",
   backgroundColor: "#82adb0",
-  accessToken: "32d41205e7b5454a96117ac24ad65897",
+  // accessToken: "32d41205e7b5454a96117ac24ad65897", // Web Demo API.AI agent key
+  accessToken: "b745f3f6e65b458e895add17566b55dc",    // Test API.AI agent key
   // END: CONFIGURABLE OPTIONS
   enterKeyCode: 13,
   loading: false,
@@ -16,7 +17,8 @@ var chatbot = {
   messageTypes: {
     10: "text",
     11: "card",
-    12: "quick"
+    12: "quick",
+    14: "video"
   },
   get client() {
     try {
@@ -156,6 +158,7 @@ chatbot.checkMessage = function(message) {
 };
 
 chatbot.handleResponse = function(response) {
+  console.log(response);
   // Reset the contexts on the chatbot object. Okay to replace, rather than add to, the contexts array, since active contexts and context expiry for the session are handled by api.ai.
   chatbot.activeContexts.contexts = response.result.contexts;
   // The messages array in the response may contain a number of messages, >= 0 of which are intended for the chatbot web application.
@@ -186,6 +189,8 @@ chatbot.attachResponse = function(message, error) {
     var $bubbleText;
     var $p;
     var $card;
+    var $video;
+    var $videoPlayer;
     var $cardTitle;
     var $cardSubtitle;
     var $cardImage;
@@ -280,6 +285,14 @@ chatbot.attachResponse = function(message, error) {
       }
 
       $response.append($card);
+
+    } else if (messageType === "video") {
+      $video = $("<div class='video'></div>");
+      $videoPlayer = $("<iframe class='video__player'></video>");
+      var url = payload.videourl + "?showinfo=0";
+      $videoPlayer.attr("src", url);
+      $video.append($videoPlayer);
+      $response.append($video);
     }
 
     $chatbotWindow.append($response);
