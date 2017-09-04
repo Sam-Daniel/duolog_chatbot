@@ -169,6 +169,8 @@ chatbot.attachResponse = function(message, error) {
     var $bubbleText;
     var $p;
     var $card;
+    var $video;
+    var $videoPlayer;
     var $cardTitle;
     var $cardSubtitle;
     var $cardImage;
@@ -265,7 +267,12 @@ chatbot.attachResponse = function(message, error) {
       $response.append($card);
 
     } else if (messageType === "video") {
-      // TODO: Handle video
+      $video = $("<div class='video'></div>");
+      $videoPlayer = $("<iframe class='video__player'></video>");
+      var url = payload.videourl + "?showinfo=0";
+      $videoPlayer.attr("src", url);
+      $video.append($videoPlayer);
+      $response.append($video);
     }
 
     $chatbotWindow.append($response);
