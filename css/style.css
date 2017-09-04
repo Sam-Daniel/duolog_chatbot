@@ -1,7 +1,12 @@
+html {
+  font-size: 62.5%;
+}
+
 body {
   font-family: Helvetica, sans-serif;
   padding: 0;
   margin: 5vh 0;
+  font-size: 1.2rem;
 }
 
 .container {
@@ -11,7 +16,7 @@ body {
 
 .chatbot {
   background-color: #FFFFFF;
-  width: 500px;
+  max-width: 400px;
   margin: 0 auto;
   height: 90vh;
   box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
@@ -67,7 +72,7 @@ body {
 
 .bubble {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 0 1.2rem;
 }
 
 .response .bubble {
@@ -87,7 +92,7 @@ body {
 
 .bubble__text p {
   margin: 0;
-  line-height: 24px;
+  line-height: 2.2rem;
 }
 
 .quick-reply {
@@ -104,10 +109,10 @@ body {
   display: inline-block;
   width: 30%;
   text-align: center;
-  padding: 6px 0;
   cursor: pointer;
   transition: all 0.25s;
   overflow: hidden;
+  line-height: 2.2rem;
 }
 
 .quick-reply--5, .quick-reply--4 {
@@ -134,7 +139,7 @@ body {
   background-color: #400080;
 }
 
-.card {
+.card, .video {
   background-color: #FFFFFF;
   margin: 0 auto;
   max-width: 400px;
@@ -143,7 +148,7 @@ body {
   overflow: hidden;
 }
 
-.card__image {
+.card__image, .video__container {
   width: 100%;
   padding-top: 53%; /* Approximation to achieve 1:1.9 ratio*/
   background-size: cover;
@@ -155,7 +160,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.3rem;
 }
 
 .card__title strong {
@@ -163,9 +168,9 @@ body {
 }
 
 .card__subtitle {
-  margin: 0px 12px 6px 12px;
+  margin: 2px 12px 6px 12px;
   color: #888888;
-  font-size: 14px;
+  font-size: 1.2rem;
   font-weight: 500;
   font-weight: 500;
 }
@@ -175,7 +180,7 @@ body {
   cursor: pointer;
   text-align: center;
   color: #400080;
-  padding: 6px 0;
+  line-height: 2.2rem;
   transition: all 0.25s;
 }
 
@@ -201,9 +206,9 @@ body {
   font-family: Helvetica, sans-serif;
   padding-left: 12px;
   border: none;
-  font-size: 16px;
+  font-size: 1.6rem;
   width: 100%;
-  line-height: 60px;
+  line-height: 6rem;
 }
 
 .input__button {
@@ -240,6 +245,7 @@ body {
   position: relative;
   top: -15px;
   width: 100%;
+  font-size: 1.2rem;
 }
 
 .error--hidden {
@@ -319,7 +325,7 @@ body {
     transform: scale(0);
   } 70% {
     opacity: .7;
-    transform: scale(1.1);
+    transform: scale(1.05);
   } 100% {
     opacity: 1;
     transform: scale(1);
@@ -330,7 +336,7 @@ body {
 /**** MEDIA QUERIES ****/
 /***********************/
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   body {
     margin: 0;
   }

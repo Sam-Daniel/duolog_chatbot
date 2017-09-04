@@ -2,7 +2,8 @@ var chatbot = {
   // START: CONFIGURABLE OPTIONS
   headerImage: "http://i.imgur.com/NggwaAk.png",
   backgroundColor: "#82adb0",
-  accessToken: "32d41205e7b5454a96117ac24ad65897",
+  // accessToken: "32d41205e7b5454a96117ac24ad65897", // Web Demo API.AI agent key
+  accessToken: "b745f3f6e65b458e895add17566b55dc",    // Test API.AI agent key
   // END: CONFIGURABLE OPTIONS
   enterKeyCode: 13,
   loading: false,
@@ -14,7 +15,8 @@ var chatbot = {
   messageTypes: {
     10: "text",
     11: "card",
-    12: "quick"
+    12: "quick",
+    14: "video"
   },
   get client() {
     return new ApiAi.ApiAiClient({accessToken: this.accessToken});
@@ -261,6 +263,9 @@ chatbot.attachResponse = function(message, error) {
       }
 
       $response.append($card);
+
+    } else if (messageType === "video") {
+      // TODO: Handle video
     }
 
     $chatbotWindow.append($response);
