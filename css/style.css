@@ -9,11 +9,6 @@ body {
   font-size: 1.2rem;
 }
 
-.container {
-  max-width: 960px;
-  margin: 5vh auto;
-}
-
 .chatbot {
   background-color: #FFFFFF;
   width: 360px;
@@ -30,7 +25,7 @@ body {
 /******* HEADER  *******/
 /***********************/
 
-.chatbot__header {
+.header {
   height: 15%;
   background-color: #cccccc; /* Fallback if no image */
   background-size: cover;
@@ -39,11 +34,38 @@ body {
   z-index: 1;
 }
 
+.header__wrapper {
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: table;
+}
+
+.header__color {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.header__text {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 100;
+  margin: 0;
+  padding: 0 1.2rem;
+  display: table-cell;
+  vertical-align: middle;
+}
+
 /***********************/
 /******** WINDOW *******/
 /***********************/
 
-.chatbot__window {
+.window {
   box-sizing: border-box;
   height: 80%;
   overflow: scroll;
@@ -217,7 +239,7 @@ iframe {
 /******** INPUT ********/
 /***********************/
 
-.chatbot__input {
+.input {
   border-top: 1px solid #d3d3d3;
   position: absolute;
   bottom: 0;
@@ -264,7 +286,7 @@ iframe {
 /******** STATUS / ERROR / LOADER *******/
 /****************************************/
 
-.chatbot__status {
+.status {
   text-align: center;
   position: relative;
   top: -30px;

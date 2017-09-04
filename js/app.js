@@ -3,6 +3,7 @@ var iframe;
 var chatbot = {
   // START: CONFIGURABLE OPTIONS
   headerImage: "http://i.imgur.com/NggwaAk.png",
+  headerText: "Duolog Chatbot",
   backgroundColor: "#82adb0",
   // accessToken: "32d41205e7b5454a96117ac24ad65897", // Web Demo API.AI agent key
   accessToken: "b745f3f6e65b458e895add17566b55dc",    // Test API.AI agent key
@@ -318,14 +319,20 @@ $(document).ready(function() {
   /**************************/
   $input = $(".input__text");
   $container = $("body");
-  $chatbotWindow = $(".chatbot__window");
-  $chatbotHeader = $(".chatbot__header");
+  $chatbotWindow = $(".window");
+  $chatbotHeader = $(".header");
+  $chatbotHeaderColor = $(".header__color");
+  $chatbotHeaderText = $(".header__text");
   $loading = $(".loading");
   $error = $(".error");
   $send = $(".input__send");
 
+
+
   $container.css("background-color", chatbot.backgroundColor);
+  $chatbotHeaderColor.css("background-color", chatbot.backgroundColor);
   $chatbotHeader.css("background-image", "url('" + chatbot.headerImage + "')");
+  $chatbotHeaderText.text(chatbot.headerText);
 
   chatbot.init();
 
