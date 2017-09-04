@@ -58,7 +58,7 @@ body {
   position: relative;
 }
 
-.card::before, .response > .bubble::before {
+.card::before, .response > .bubble::before, .video::before {
   content: url(../assets/duolog_logo_small.png);
   opacity: 0.2;
   position: absolute;
