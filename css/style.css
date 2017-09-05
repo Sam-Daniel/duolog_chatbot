@@ -254,6 +254,8 @@ body {
   border-radius: 12px;
   overflow: hidden;
   padding: 0;
+  position: relative;
+  z-index: 1;
 }
 
 iframe {
