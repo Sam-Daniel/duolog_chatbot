@@ -46,12 +46,14 @@ body {
 .header__color {
   position: absolute;
   left: 0;
+  z-index: -1;
   height: 100%;
   width: 100%;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .header__text {
+  box-sizing: border-box;
   font-size: 3rem;
   line-height: 3rem;
   font-weight: 100;

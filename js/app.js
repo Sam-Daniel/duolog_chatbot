@@ -61,7 +61,9 @@ var chatbot = {
       console.log("Error:", error);
       chatbot.attachResponse(error, "error");
     });
-  }, activeContexts: {contexts: []}
+  },
+  activeContexts: {contexts: []}
+
 };
 
 chatbot.toggleLoading = function() {
@@ -162,6 +164,7 @@ chatbot.handleResponse = function(response) {
   console.log(response);
   // Reset the contexts on the chatbot object. Okay to replace, rather than add to, the contexts array, since active contexts and context expiry for the session are handled by api.ai.
   chatbot.activeContexts.contexts = response.result.contexts;
+  console.log(chatbot.activeContexts)
   // The messages array in the response may contain a number of messages, >= 0 of which are intended for the chatbot web application.
   var allMessages = response.result.fulfillment.messages;
 
@@ -330,9 +333,13 @@ $(document).ready(function() {
 
 
   $container.css("background-color", chatbot.backgroundColor);
-  $chatbotHeaderColor.css("background-color", chatbot.backgroundColor);
   $chatbotHeader.css("background-image", "url('" + chatbot.headerImage + "')");
-  $chatbotHeaderText.text(chatbot.headerText);
+  if (chatbot.headerText === "") {
+    $chatbotHeaderText.hide();
+  } else {
+    $chatbotHeaderColor.css("background-color", chatbot.backgroundColor);
+    $chatbotHeaderText.text(chatbot.headerText);
+  }
 
   chatbot.init();
 
