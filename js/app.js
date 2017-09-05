@@ -136,7 +136,7 @@ chatbot.attachQuery = function(query) {
   }
   $bubble.append($bubbleText);
   $query.append($bubble);
-  $chatbotWindow.append($query);
+  $conversation.append($query);
   $chatbotWindow.animate({
     scrollTop: $chatbotWindow[0].scrollHeight
   }, 500);
@@ -299,7 +299,7 @@ chatbot.attachResponse = function(message, error) {
       $response.append($video);
     }
 
-    $chatbotWindow.append($response);
+    $conversation.append($response);
     $(".quick-reply__button").after(" ");
 
   } else {
@@ -323,6 +323,7 @@ $(document).ready(function() {
   $input = $(".input__text");
   $container = $("body");
   $chatbotWindow = $(".window");
+  $conversation = $(".conversation");
   $chatbotHeader = $(".header");
   $chatbotHeaderColor = $(".header__color");
   $chatbotHeaderText = $(".header__text");
