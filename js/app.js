@@ -21,13 +21,6 @@ var chatbot = {
     12: "quick",
     14: "video"
   },
-  get client() {
-    try {
-      return new ApiAi.ApiAiClient({accessToken: this.accessToken});
-    } catch(error) {
-      this.toggleError(error.message);
-    }
-  },
   get sessionId() {
     try {
       return this.client.sessionId;
@@ -52,18 +45,17 @@ var chatbot = {
     } catch(error) {
       this.toggleError(error.message);
     }
-
   },
   init: function() {
+    this.client = new ApiAi.ApiAiClient({accessToken: this.accessToken});
+
     this.eventRequest("custom_welcome").then(function(response) {
       chatbot.handleResponse(response);
     }).catch(function(error) {
-      console.log("Error:", error);
-      chatbot.attachResponse(error, "error");
+      chatbot.attachResponse("error", error);
     });
   },
   activeContexts: {contexts: []}
-
 };
 
 chatbot.toggleLoading = function() {
@@ -146,8 +138,7 @@ chatbot.handleQuery = function(input) {
   chatbot.sendText(input, chatbot.activeContexts).then(function(response) {
     chatbot.handleResponse(response);
   }).catch(function(err) {
-    console.log("Error:", err);
-    chatbot.attachResponse(err, "error");
+    chatbot.attachResponse("error", err);
   });
 };
 
@@ -164,7 +155,6 @@ chatbot.handleResponse = function(response) {
   console.log(response);
   // Reset the contexts on the chatbot object. Okay to replace, rather than add to, the contexts array, since active contexts and context expiry for the session are handled by api.ai.
   chatbot.activeContexts.contexts = response.result.contexts;
-  console.log(chatbot.activeContexts)
   // The messages array in the response may contain a number of messages, >= 0 of which are intended for the chatbot web application.
   var allMessages = response.result.fulfillment.messages;
 
@@ -303,7 +293,7 @@ chatbot.attachResponse = function(message, error) {
     $(".quick-reply__button").after(" ");
 
   } else {
-    chatbot.toggleError();
+    chatbot.toggleError(error);
   }
 
   $chatbotWindow.animate({

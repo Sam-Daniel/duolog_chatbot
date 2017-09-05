@@ -31,7 +31,6 @@ body {
   flex-direction: column;
 }
 
-
 /***********************/
 /******* HEADER  *******/
 /***********************/
@@ -255,7 +254,7 @@ body {
   overflow: hidden;
   padding: 0;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* Necessary to prevent intermittent bug where border radius does not clip content when a transition is applied to the element*/
 }
 
 iframe {
