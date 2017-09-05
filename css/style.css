@@ -13,15 +13,24 @@ body {
   background-color: #FFFFFF;
   width: 360px;
   height: 640px;
+  -webkit-box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
   box-shadow: 0px 0px 17px 2px rgba(0, 0, 0, 0.22);
   overflow: hidden;
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
+
 
 /***********************/
 /******* HEADER  *******/
@@ -29,11 +38,14 @@ body {
 
 .header {
   height: 15%;
-  background-color: #cccccc; /* Fallback if no image */
+  background-color: #cccccc;
+  /* Fallback if no image */
   background-size: cover;
+  -webkit-box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
   box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
   position: relative;
   z-index: 1;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
@@ -42,6 +54,8 @@ body {
   position: absolute;
   top: 50%;
   right: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   display: table;
 }
@@ -66,6 +80,7 @@ body {
   vertical-align: middle;
 }
 
+
 /***********************/
 /******** WINDOW *******/
 /***********************/
@@ -73,7 +88,10 @@ body {
 .window {
   box-sizing: border-box;
   overflow-y: scroll;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
+  -ms-flex-negative: 1;
   flex-shrink: 1;
   padding: 20px 12px 12px 20px;
 }
@@ -86,18 +104,21 @@ body {
   position: relative;
 }
 
-.card::before, .response > .bubble::before, .video::before {
+.card::before, .response>.bubble::before, .video::before {
   content: url(../assets/duolog_logo_small.png);
   opacity: 0.2;
   position: absolute;
   left: -40px;
   top: 50%;
+  -webkit-transform: translateY(-50%) scale(0.35);
+  -ms-transform: translateY(-50%) scale(0.35);
   transform: translateY(-50%) scale(0.35);
 }
 
 .query, .response {
   margin: 12px;
   font-weight: 100;
+  -webkit-animation: 500ms ease-in-out zoom;
   animation: 500ms ease-in-out zoom;
 }
 
@@ -182,7 +203,8 @@ body {
 
 .card__image {
   width: 100%;
-  padding-top: 53%; /* Approximation to achieve 1:1.9 ratio*/
+  padding-top: 53%;
+  /* Approximation to achieve 1:1.9 ratio*/
   background-size: cover;
 }
 
@@ -190,6 +212,7 @@ body {
   margin: 6px 12px 0 12px;
   white-space: nowrap;
   overflow: hidden;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   font-weight: 600;
   font-size: 1.3rem;
@@ -213,6 +236,8 @@ body {
   text-align: center;
   color: #400080;
   line-height: 2.2rem;
+  -webkit-transition: all 0.25s;
+  -o-transition: all 0.25s;
   transition: all 0.25s;
 }
 
@@ -241,6 +266,8 @@ iframe {
   border: none;
   display: block;
 }
+
+
 /***********************/
 /******** INPUT ********/
 /***********************/
@@ -250,6 +277,7 @@ iframe {
   height: 4rem;
   width: 100%;
   background-color: #FFFFFF;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
@@ -273,12 +301,15 @@ iframe {
   font-size: 3rem;
   line-height: 4rem;
   cursor: pointer;
+  -webkit-transition: all 0.25s;
+  -o-transition: all 0.25s;
   transition: all 0.25s;
 }
 
 .input__mic--inactive, .input__send--inactive {
   color: #B7BBC4;
 }
+
 .input__mic--active, .input__send--active {
   color: #F76949;
 }
@@ -332,19 +363,23 @@ iframe {
   height: 10px;
   border-radius: 50%;
   background-color: black;
+  -webkit-animation: loader 1.4s infinite ease-in-out both;
   animation: loader 1.4s infinite ease-in-out both;
   margin: 0 1px;
 }
 
 .loading__left {
+  -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
 
 .loading__middle {
+  -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
 
-.loading__right{
+.loading__right {
+  -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
 
@@ -352,17 +387,54 @@ iframe {
 /***** ANIMATION KEYFRAMES *****/
 /*******************************/
 
+@-webkit-keyframes loader {
+  0% {
+    -webkit-transform: scale(.2);
+    transform: scale(.2);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0.5;
+  }
+  100% {
+    -webkit-transform: scale(.2);
+    transform: scale(.2);
+    opacity: 0.2;
+  }
+}
+
 @keyframes loader {
   0% {
     transform: scale(.2);
     opacity: 1;
-
-  } 50% {
+  }
+  50% {
     transform: scale(1.0);
     opacity: 0.5;
-  } 100% {
+  }
+  100% {
     transform: scale(.2);
     opacity: 0.2;
+  }
+}
+
+@-webkit-keyframes zoom {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  70% {
+    opacity: .7;
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
 
@@ -370,10 +442,12 @@ iframe {
   0% {
     opacity: 0;
     transform: scale(0);
-  } 70% {
+  }
+  70% {
     opacity: .7;
     transform: scale(1.05);
-  } 100% {
+  }
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -384,18 +458,15 @@ iframe {
 /***********************/
 
 @media (max-width: 360px) {
-
   .chatbot {
     width: 100vw;
     height: 100vh;
   }
-
   .quick-reply__button {
     display: block;
     width: 98% !important;
     margin-bottom: 6px;
   }
-
 }
 
 @media (max-height: 640px) {
