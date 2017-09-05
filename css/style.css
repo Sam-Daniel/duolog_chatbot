@@ -357,6 +357,13 @@ iframe {
   opacity: 0;
 }
 
+.loading--hidden div {
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused;
+  animation-play-state:paused;
+}
+
 .loading__left, .loading__middle, .loading__right {
   display: inline-block;
   width: 10px;
