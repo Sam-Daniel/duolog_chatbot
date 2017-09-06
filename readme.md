@@ -3,10 +3,10 @@
 |                |                                                         |
 | :------------- | :------------------------------------------------------ |
 | Owner          | Doug Maloney, Duolog                                    |
-| Developer      | [Christopher Barnaby](http://www.cjbarnaby.com.au)       |
+| Developer      | [Christopher Barnaby](http://www.cjbarnaby.com.au)      |
 | Date           | 17 August 2017                                          |
 | Project type   | Proof of Concept                                        |
-| Version        | 1.1.0                                                   |
+| Version        | 0.2.0                                                   |
 ___
 
 ### Overview
@@ -15,11 +15,11 @@ The chatbot is a static web app that connects a web interface to API.AI chatbot 
 
 ### Dependencies
 
-- jQuery v 3.2.1
-- API.AI JavaScript SDK
-- Google Material Icons
+- [jQuery v 3.2.1](http://jquery.com/download/)
+- [API.AI JavaScript SDK](https://github.com/api-ai/apiai-javascript-client)
+- [Google Material Icons](https://material.io/icons/)
 
-A note regarding the API.AI JavaScript SDK – This library is sufficient for the current implementation but doesn't really bring much to the table, aside from frustratingly obfuscating the process of making calls to the API and being a poorly documented library. Handling AJAX requests with bare XMLHttpRequests or jQuery .ajax() functions may indeed be preferable if the application is further modified.
+A note regarding the API.AI JavaScript SDK – This library is sufficient for the current implementation but doesn't really bring much to the table, aside from frustratingly obfuscating the process of making calls to the API and not being particular well documented. Handling AJAX requests with bare XMLHttpRequests or jQuery .ajax() functions may indeed be preferable if the application is further modified.
 
 ### Usage
 
@@ -49,8 +49,8 @@ The application expects JSON returned in custom payloads to meet the following s
 
 #### Rich Text
 
-- **Type:** 10
-- **Text:**
+- **type:** 10
+- **text:**
   - No character limit.
   - All UTF-8 characters, including emojis accepted.
   - Line-breaks can be created using `\n` and will be parsed as expected.
@@ -64,13 +64,13 @@ The application expects JSON returned in custom payloads to meet the following s
 
 #### Quick Reply
 
-- **Type:** 12
-- **Title:**
+- **type:** 12
+- **title:**
   - No character limit.
   - All UTF-8 characters, including emojis accepted.
   - Line-breaks can be created using `\n` and will be parsed as expected.
 
-- **Replies:**
+- **replies:**
   - 12 character limit per reply.
   - No minimum or maximum number of replies per Quick Reply
   - All UTF-8 characters, including emojis, are accepted.
@@ -89,18 +89,18 @@ The application expects JSON returned in custom payloads to meet the following s
 
 #### Card
 
-- **Type:** 11
-- **Imageurl**: Any valid URL for an image on the web.
-- **Title:** Title will be trimmed when it reaches width of element, truncated by ellipsis (`...`).
-- **Subtitle:** Subtitles will be trimmed at 80 characters, truncated by ellipsis (`...`).
-- **Button labels:**
+- **type:** 11
+- **imageurl**: Any valid URL for an image on the web.
+- **title:** Title will be trimmed when it reaches width of element, truncated by ellipsis (`...`).
+- **subtitle:** Subtitles will be trimmed at 80 characters, truncated by ellipsis (`...`).
+- **buttons — labels:**
   - No character limit, but recommend < 45 characters for optimal presentation.
   - No minimum or maximum number of buttons per card.
   - All UTF-8 characters, including emojis, are accepted.
-- **web_url:**
+- **buttons — web_url:**
   - Including this key in a button will cause the URL value assigned to the key to be opened in a new browser tab when clicked.
   - Can be any valid URL.
-- **postback:**
+- **pbuttons — postback:**
   - Including this key in a button will cause the value assigned to the key to be sent back to the API.AI agent in a new request.
 
 ```JSON
@@ -122,6 +122,20 @@ The application expects JSON returned in custom payloads to meet the following s
 }
 ```
 
+#### Video
+
+- **type:** 14
+- **videourl:**
+  - Currently limited to YouTube video URLs.
+  - URL must be the '/embed/' URL format.
+
+```JSON
+{
+  "type": 14,
+  "videourl": "https://www.youtube.com/embed/UTfJDg_D8UM"
+}
+```
+
 #### Contexts
 
 The application will respond to contexts configured for an agent intent in the API.AI console. These should not be added as custom JSON payload data, but configured manually in the console. The application will include any received context in subsequent api calls, deferring to API.AI agent logic for context expiry (default: 5 requests or 10 minutes after context set).
@@ -133,30 +147,7 @@ The application has been deployed to [BitBalloon](https://www.bitballoon.com/), 
 - [BitBalloon chatbot admin portal](https://www.bitballoon.com/sites/duolog-webdemo)
 - [Live application](http://duolog-webdemo.bitballoon.com/)
 
-The application (as deployed on BitBalloon) can be embedded in another website via HTML `<iframe>` without causing cross origin resource sharing errors. Using a CMS system such as SquareSpace, WordPress, etc, a custom page should be built with the following HTML:
-
-```html
-
-<style>
-   .chatbot-iframe-wrapper {
-     margin: 0 auto;
-     max-width: 960px;
-     height: 100vh;
-   }
-   .chatbot-iframe-wrapper iframe {
-     border: none;
-     height: 100%;
-     width: 100%;
-   }
- </style>
-
- <div class="chatbot-iframe-wrapper">
-   <iframe src="http://duolog.bitballoon.com/"></iframe>
- </div>
-
-```
-
-NOTE: This code may need to be modified slightly depending on the HTML and CSS applied to the page by the CMS templates. The styles in the HTML anticipate no other content on the page. Contact the developer for customization as necessary.
+The application (as deployed on BitBalloon) can be embedded in another website via HTML `<iframe>` without causing cross origin resource sharing errors. Using a CMS system such as SquareSpace, WordPress, etc, a custom page should be built with the HTML set out in the [chatbot container demo repo](https://github.com/cjbarnaby/chatbot_container). Contact the developer for customization as necessary.
 
 For a successful implementation example, see:
 
@@ -171,7 +162,8 @@ The app has been designed to allow minor changes to be made via text editor by p
 
 - **Header image:** Replace URL in the `chatbot.headerImage` property with the URL of any image on the web. While the image will entirely cover the relevant element in the UI (without distortion) regardless of the size and aspect ratio of the source image, it is recommended that source images as close to 500 x 157 pixels as possible are used to ensure optimal appearance with minimal performance impact (eg, due to unnecessarily large file sizes).
 - **Chatbot agent:** Replace the token in the `chatbot.accessToken` property. The access token for the agent intended to be connected to the application can be selected in the API.AI console be selecting the agent, then clicking the settings cog next to the agent name and copying the `client access token` to the clipboard. Note: ensure that the client access token is copied and *not* the developer access token.
-- **Chatbot background color:** Replace the color in the `chatbot.backgroundColor` property. This can be any color in valid CSS color format (eg, any of `#FFFFFF` or `rgb(0,0,0)` or `rgba(0,0,0,1)` or `white` will work to make the background color white).
+- **Chatbot background color:** Replace the color in the `chatbot.backgroundColor` property. This can be any color in valid CSS color format (eg, any of `#FFFFFF` or `rgb(0,0,0)` or `rgba(0,0,0,1)` or `white` will work to make the background color white). As of 0.2.0, this will also change the color behind the banner text in the banner.
+- **Banner text:** Replace the text in the `chatbot.headerText` property.
 
 For all the changes above, ensure that the value given to the property is enclosed in quote marks (either single (`'`)or double quote (`"`) marks), and ensure that there is a comma after the closing quote mark. Example:
 
@@ -179,6 +171,7 @@ For all the changes above, ensure that the value given to the property is enclos
 
 var chatbot = {
   headerImage: "http://i.imgur.com/NggwaAk.png",
+  headerText: "Duolog Chatbot",
   backgroundColor: "#FFFFFF",
   accessToken: "b745f3f6e65b458e895add17566b55dc",
   enterKeyCode: 13,
@@ -211,6 +204,7 @@ ___
 
 ### Change Log
 
-| Version | Date           | Changes |
-| :------ | :------------- | :------------- |
-| 1.1.0   | 21 August 2017 | Application now distinguishes between — and disregards — messages intended for other platforms, and handles multiple messages per response. |
+| Version | Date             | Changes |
+| :------ | :--------------- | :------------- |
+| 0.1.0   | 21 August 2017   | Application now distinguishes between — and disregards — messages intended for other platforms, and handles multiple messages per response. |
+| 0.2.0   | 6 September 2017 | YouTube video support; configurable bot title; animated responses; compact UI redesign; flex layout; persistent client/session per session. |

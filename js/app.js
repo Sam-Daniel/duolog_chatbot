@@ -5,8 +5,7 @@ var chatbot = {
   headerImage: "http://i.imgur.com/NggwaAk.png",
   headerText: "Duolog Chatbot",
   backgroundColor: "#82adb0",
-  // accessToken: "32d41205e7b5454a96117ac24ad65897", // Web Demo API.AI agent key
-  accessToken: "b745f3f6e65b458e895add17566b55dc",    // Test API.AI agent key
+  accessToken: "32d41205e7b5454a96117ac24ad65897",
   // END: CONFIGURABLE OPTIONS
   enterKeyCode: 13,
   loading: false,
