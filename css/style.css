@@ -469,7 +469,7 @@ iframe {
 /**** MEDIA QUERIES ****/
 /***********************/
 
-@media (max-width: 360px) {
+@media (max-width: 359px) {
   .chatbot {
     width: 100vw;
     height: 100vh;
@@ -481,7 +481,7 @@ iframe {
   }
 }
 
-@media (max-height: 640px) {
+@media (max-height: 639px) {
   .chatbot {
     height: 100vh;
   }
