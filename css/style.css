@@ -284,6 +284,7 @@ iframe {
   background-color: #FFFFFF;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  position: relative;
 }
 
 .input__text {
