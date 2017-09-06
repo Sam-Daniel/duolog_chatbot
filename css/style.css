@@ -37,8 +37,7 @@ body {
 
 .header {
   height: 15%;
-  background-color: #cccccc;
-  /* Fallback if no image */
+  background-color: #cccccc;  /* Fallback if no image */
   background-size: cover;
   -webkit-box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
   box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.70);
@@ -202,8 +201,7 @@ body {
 
 .card__image {
   width: 100%;
-  padding-top: 53%;
-  /* Approximation to achieve 1:1.9 ratio*/
+  padding-top: 53%; /* Approximation to achieve 1:1.9 ratio*/
   background-size: cover;
 }
 
@@ -246,6 +244,12 @@ body {
 }
 
 .video {
+  /* An otherwise superfluous element needed since overflow: hidden necessary to achieve border radius effect on video, but that hides the avatar/icon pseudo element. */
+  margin: 0;
+  padding: 0;
+}
+
+.video__box {
   background-color: #FFFFFF;
   margin: 0 auto;
   max-width: 400px;

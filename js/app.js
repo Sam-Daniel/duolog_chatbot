@@ -48,7 +48,6 @@ var chatbot = {
   },
   init: function() {
     this.client = new ApiAi.ApiAiClient({accessToken: this.accessToken});
-
     this.eventRequest("custom_welcome").then(function(response) {
       chatbot.handleResponse(response);
     }).catch(function(error) {
@@ -184,6 +183,7 @@ chatbot.attachResponse = function(message, error) {
     var $p;
     var $card;
     var $video;
+    var $videoBox;
     var $videoPlayer;
     var $cardTitle;
     var $cardSubtitle;
@@ -282,10 +282,12 @@ chatbot.attachResponse = function(message, error) {
 
     } else if (messageType === "video") {
       $video = $("<div class='video'></div>");
+      $videoBox = $("<div class='video__box'></div>");
       $videoPlayer = $("<iframe class='video__player'></video>");
       var url = payload.videourl + "?showinfo=0";
       $videoPlayer.attr("src", url);
-      $video.append($videoPlayer);
+      $videoBox.append($videoPlayer);
+      $video.append($videoBox);
       $response.append($video);
     }
 
