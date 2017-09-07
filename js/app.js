@@ -2,9 +2,9 @@ var iframe;
 
 var chatbot = {
   // START: CONFIGURABLE OPTIONS
-  headerImage: "http://i.imgur.com/NggwaAk.png",
-  headerText: "Duolog Chatbot",
-  backgroundColor: "#82adb0",
+  headerImage: "http://www.moosepakllc.com/wp-content/uploads/2014/08/slider-grey-bar-dark.jpg",
+  headerText: "Chatbot",
+  backgroundColor: "#07565b",
   accessToken: "26a12e4b2f1347bba375bb1deffb8fb2",
   // END: CONFIGURABLE OPTIONS
   enterKeyCode: 13,
