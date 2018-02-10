@@ -5,7 +5,7 @@ var chatbot = {
   headerImage: "http://www.moosepakllc.com/wp-content/uploads/2014/08/slider-grey-bar-dark.jpg",
   headerText: "Chatbot",
   backgroundColor: "#ec7323",
-  accessToken: "26a12e4b2f1347bba375bb1deffb8fb2",
+  accessToken: "e6d0a7c6e0e741729839cadf0d76d987",
   // END: CONFIGURABLE OPTIONS
   enterKeyCode: 13,
   loading: false,
