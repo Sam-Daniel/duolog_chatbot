@@ -10,38 +10,53 @@
   <script type="text/javascript" src="js/app.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="css/style.css">
-  <title>Chatbot</title>
-</head>
 
-<body>
-  <div class="chatbot">
-    <div class="header">
-      <div class="header__wrapper">
-        <div class="header__color"></div>
-        <h1 class="header__text"></h1>
-      </div>
-    </div>
-    <div class="window">
-      <div class="conversation"></div>
-      <div class="status">
-        <div class="loading loading--hidden">
-          <div class="loading__left "></div>
-          <div class="loading__middle"></div>
-          <div class="loading__right"></div>
-        </div>
-        <div class="error error--hidden">
-          <div class="error__message"></div>
-        </div>
-      </div>
-    </div>
+    </head>
 
-    <div class="input">
-      <input class="input__text" type="text" name="" value="" placeholder="Say something" autofocus>
-      <div class="input__button">
-        <i class="material-icons input__send input__send--inactive">&#xE163;</i>
-      </div>
-    </div>
-  </div>
-</body>
+    <body>
+	    
+               
+                
+           
+        
+	    <div class="headerBar">
+                <div class="user-photo"><img src="https://image.ibb.co/govGY7/oie_transparent_12.png"></div>
+                <p class="title"> NVT Phybridge </p>
+		    
+
+        </div>
+
+        
+        
+        <div class="chatbox"> 
+	  
+            <div class="chatlogs">
+            
+                <div class="chat friend">
+                    <div class="user-photo"><img src="https://image.ibb.co/govGY7/oie_transparent_12.png"></div>
+                    <p class="chat-message">Hi!</p>
+                </div>
+
+                <div class="chat friend" id="loadingGif" style="display: none;">
+                     <div class="user-photo"><img src="https://image.ibb.co/govGY7/oie_transparent_12.png"></div>
+                    <div class="gif"><img src="Images/loading.gif"></div>
+                </div>
+
+            </div>
+
+             <div class="chat-form">
+                <div id="inputDiv" autofocus/>
+                    <textarea class="input" type="text" name="" value="" placeholder="Ask Us" autofocus></textarea>
+                </div>
+                <div id="chat-form-buttons">
+                    
+      
+                </div>
+               <!--<button id="switchInputType"></button>-->
+
+        </div>
+
+        <script type="text/javascript" src="index.js"></script>  
+    </body>
 
 </html>
