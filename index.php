@@ -16,7 +16,7 @@
 
 <body>
   <div class="chatbot">
-    <div class="header">
+    <div class="header"><p class="title"> NVT Phybridge </p>
       <div class="header__wrapper">
         <div class="header__color"></div>
         <h1 class="header__text"></h1>
