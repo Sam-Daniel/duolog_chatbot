@@ -2,9 +2,9 @@ var iframe;
 
 var chatbot = {
   // START: CONFIGURABLE OPTIONS
-  headerImage: "http://www.moosepakllc.com/wp-content/uploads/2014/08/slider-grey-bar-dark.jpg",
-  headerText: "Chatbot",
-  backgroundColor: "#ec7323",
+  headerImage: "https://image.ibb.co/cpbe37/header_phy_network.png",
+  headerText: "NVT Phybridge",
+  backgroundColor: "#FFFFF",
   accessToken: "e6d0a7c6e0e741729839cadf0d76d987",
   // END: CONFIGURABLE OPTIONS
   enterKeyCode: 13,
