@@ -45,6 +45,15 @@ var chatbot = {
       this.toggleError(error.message);
     }
   },
+  init: function() {
+    this.client = new ApiAi.ApiAiClient({accessToken: this.accessToken});
+    this.eventRequest("custom_welcome").then(function(response) {
+      chatbot.handleResponse(response);
+    }).catch(function(error) {
+      chatbot.attachResponse("error", error);
+    });
+  },
+  activeContexts: {contexts: []}
   
 };
 
