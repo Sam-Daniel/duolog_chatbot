@@ -126,19 +126,19 @@ body {
 }
 
 .response .bubble {
-  background-color: #400080;
+  background-color: #23384E;
   color: #FFFFFF;
-  border-radius: 3px 12px 12px;
+  border-radius: 6px 24px 24px;
   text-align: left;
-  border: 1px solid #400080;
+  border: 1px solid #23384E;
   position: relative;
 }
 
 .query .bubble {
   background-color: #FFFFFF;
-  color: #400080;
-  border-radius: 12px 12px 3px 12px;
-  border: 1px solid #400080;
+  color: #4A89BF;
+  border-radius: 24px 24px 6px 24px;
+  border: 2px solid #4A89BF;
 }
 
 .bubble__text p {
