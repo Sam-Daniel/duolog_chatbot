@@ -122,13 +122,13 @@ body {
 
 .bubble {
   display: inline-block;
-  padding: 0 60px;
+  padding: 0 10px;
 }
 
 .response .bubble {
   background-color: #23384E;
   color: #FFFFFF;
-  padding: 15px;
+  padding: 10px;
    margin: 5px 10px 0;
   border-radius: 50px 24px 24px;
   text-align: left;
