@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="css/style.css">
 
-  <title>Chatbot</title>
+  <title>NVT Phybridge</title>
 </head>
 
 <body>
