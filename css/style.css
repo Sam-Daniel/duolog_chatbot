@@ -291,7 +291,7 @@ iframe {
   font-family: Helvetica, sans-serif;
   padding-left: 12px;
   border: none;
-  font-size: 1.4rem;
+  font-size: 18px;
   width: 100%;
   line-height: 4rem;
 }
@@ -382,18 +382,18 @@ iframe {
 }
 
 .loading__left {
-  -webkit-animation-delay: 0.1s;
-  animation-delay: 0.1s;
+  -webkit-animation-delay: 0.0s;
+  animation-delay: 0.0s;
 }
 
 .loading__middle {
-  -webkit-animation-delay: 0.2s;
-  animation-delay: 0.2s;
+  -webkit-animation-delay: 0.0s;
+  animation-delay: 0.0s;
 }
 
 .loading__right {
-  -webkit-animation-delay: 0.3s;
-  animation-delay: 0.3s;
+  -webkit-animation-delay: 0.0s;
+  animation-delay: 0.0s;
 }
 
 /*******************************/
