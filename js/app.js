@@ -3,7 +3,6 @@ var iframe;
 var chatbot = {
   // START: CONFIGURABLE OPTIONS
   headerImage: "https://image.ibb.co/cpbe37/header_phy_network.png",
-  headerText: "NVT Phybridge",
   backgroundColor: "#FFFFF",
   accessToken: "e6d0a7c6e0e741729839cadf0d76d987",
   // END: CONFIGURABLE OPTIONS
