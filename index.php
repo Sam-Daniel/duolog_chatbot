@@ -17,7 +17,7 @@
 <body>
   <div class="chatbot">
     <div class="header">
-     <div  class="title" <p> NVT Phybridge </p> > </div>
+     <div  class="title" <p> NVT Phybridge </p>  </div>
        <div class="header__wrapper">
          <div class="header__color"></div>
         <h1 class="header__text">  </h1>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="input">
-      <input class="input__text" type="text" name="" value="" placeholder="Say something" autofocus>
+      <input class="input__text" type="text" name="" value="" placeholder="Chat with us.." autofocus>
       <div class="input__button">
         <i class="material-icons input__send input__send--inactive">&#xE163;</i>
       </div>
