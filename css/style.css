@@ -118,7 +118,7 @@ body {
 
 .card::before, .response>.bubble::before, .video::before {
   content: url(../headlogo.png);
-  opacity: 0.2;
+  opacity: 1;
   position: absolute;
   left: -40px;
   top: 50%;
