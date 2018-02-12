@@ -296,7 +296,7 @@ iframe {
 /***********************/
 
 .input {
-  border-top: 1px solid #d3d3d3;
+  border-top: 1px solid #60a7d6;
   height: 3.5rem;
   width: 100%;
   background-color: #FFFFFF;
@@ -315,10 +315,11 @@ iframe {
 }
 
 .input__button {
+  solid: #23384e;
   position: absolute;
-  background-color: #23384e;
-  top: 0;
-  bottom: 0;
+  color: #23384e;
+  top: 5px;
+  bottom: 5px;
   right: 10px;
 }
 
@@ -375,7 +376,7 @@ iframe {
 }
 
 .loading--visible {
-  opacity: 1;
+  opacity: 0.7;
 }
 
 .loading--hidden {
