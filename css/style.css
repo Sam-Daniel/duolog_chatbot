@@ -47,6 +47,19 @@ body {
   flex-shrink: 0;
 }
 
+.title {
+    font-size: 55px;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    min-width: 30px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    margin: 0px auto 0px auto;
+    border-radius: 280px 28px 0px 0px;
+   }
+ 
 .header__wrapper {
   height: 50%;
   position: absolute;
