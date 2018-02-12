@@ -50,14 +50,14 @@ body {
 .title {
     font-size: 55px;
     color: white;
-    padding-left: 600px;
+    padding-left: 60px;
     width: 100%;
-    min-width: 10px;
+    min-width: 30px;
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
     margin: 0px auto 0px auto;
-    border-radius: 28px 28px 0px 0px;
+    border-radius: 280px 28px 0px 0px;
    }
  
 .header__wrapper {
