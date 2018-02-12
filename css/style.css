@@ -172,7 +172,7 @@ body {
 
 .quick-reply__button {
   background-color: #FFFFFF;
-  color: #400080;
+  color: #4682B4;
   border-radius: 12px;
   border: 1px solid #400080;
   display: inline-block;
@@ -205,7 +205,7 @@ body {
 
 .quick-reply__button:hover {
   color: #FFFFFF;
-  background-color: #400080;
+  background-color: #4682B4;
 }
 
 .card {
@@ -249,7 +249,7 @@ body {
   border-top: 1px solid #cccccc;
   cursor: pointer;
   text-align: center;
-  color: #400080;
+  color: #4682B4;
   line-height: 2.2rem;
   -webkit-transition: all 0.25s;
   -o-transition: all 0.25s;
@@ -258,7 +258,7 @@ body {
 
 .card__button:hover {
   color: #FFFFFF;
-  background-color: #400080;
+  background-color: #4682B4;
 }
 
 .video {
@@ -297,7 +297,7 @@ iframe {
 
 .input {
   border-top: 1px solid #d3d3d3;
-  height: 4rem;
+  height: 3rem;
   width: 100%;
   background-color: #FFFFFF;
   -ms-flex-negative: 0;
@@ -311,11 +311,12 @@ iframe {
   border: none;
   font-size: 18px;
   width: 100%;
-  line-height: 4rem;
+  line-height: 3rem;
 }
 
 .input__button {
   position: absolute;
+  color: #23384e;
   top: 0;
   bottom: 0;
   right: 10px;
