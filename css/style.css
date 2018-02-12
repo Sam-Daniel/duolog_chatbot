@@ -297,7 +297,7 @@ iframe {
 
 .input {
   border-top: 1px solid #d3d3d3;
-  height: 3rem;
+  height: 3.5rem;
   width: 100%;
   background-color: #FFFFFF;
   -ms-flex-negative: 0;
@@ -311,12 +311,12 @@ iframe {
   border: none;
   font-size: 18px;
   width: 100%;
-  line-height: 3rem;
+  line-height: 3.5rem;
 }
 
 .input__button {
   position: absolute;
-  color: #23384e;
+  background-color: #23384e;
   top: 0;
   bottom: 0;
   right: 10px;
