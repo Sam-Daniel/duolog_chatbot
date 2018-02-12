@@ -315,11 +315,10 @@ iframe {
 }
 
 .input__button {
-  solid: #23384e;
   position: absolute;
-  color: #23384e;
-  top: 5px;
-  bottom: 5px;
+  color: #0b7286;
+  top: 0px;
+  bottom: 0px;
   right: 10px;
 }
 
