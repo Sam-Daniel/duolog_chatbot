@@ -40,16 +40,9 @@
     <div class="input">
       <input class="input__text" type="text" name="" value="" placeholder="Chat with us.." autofocus>
       <div class="input__button">
-        <i class="material-icons input__send input__send--inactive">&#xE163;</i>
+        <i class="material-icons input__send input__send--inactive" style="color:#1b4c82;">&#xE163;</i>
       </div>
     </div>
   </div>
 </body>
-<style>
-  .material-icons input__send input__send--inactive {
-  
-  color: #0b7286;
- 
-  }
-</style>
 </html>
